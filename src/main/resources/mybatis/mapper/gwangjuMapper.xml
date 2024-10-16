@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yohaeng.gwangju.mapper.GwangjuMapper">
+    <sql id="tableName">
+        tour
+    </sql>
+
+  <!--  <select id="findAll" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+        SELECT * FROM
+        <include refid="tableName"/>
+        <if test="sigunguCode != null">
+            where sigunguCode = #{sigunguCode}
+        </if>
+
+    </select>-->
+
+    <select id="findAll" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+        SELECT * FROM
+        <include refid="tableName"/>
+        <if test="sigungu != null">
+            where sigunguCode = #{sigungu}
+        </if>
+    </select>
+
+
+    <select id="sports" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+        SELECT * FROM sports
+        <if test="sigunguCode != null">
+            where sigunguCode = #{sigunguCode}
+        </if>
+
+    </select>
+
+    <select id="parking" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+        SELECT * FROM parking
+        <if test="sigunguCode != null">
+            where sigunguCode = #{sigunguCode}
+        </if>
+
+    </select>
+
+    <select id="showDongs" parameterType="String" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+        SELECT * FROM tour
+        WHERE addr2 LIKE CONCAT(#{dongName}, '%')
+
+
+    </select>
+
+    <select id="showDongs2" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+        SELECT * FROM tour_dong
+
+
+    </select>
+
+    <select id="showAllDongs" parameterType="String" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+        SELECT * FROM tour_dong
+        WHERE addr2 LIKE CONCAT(#{dongName}, '%')
+        union
+        SELECT * FROM tour
+        WHERE addr2 LIKE CONCAT(#{dongName}, '%')
+
+    </select>
+
+    <select id="selectTour" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+        SELECT * FROM tour WHERE id = #{id}
+        union
+        SELECT * FROM tour_dong WHERE id = #{id}
+
+    </select>
+    <select id="selectTourDong" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+
+        SELECT * FROM tour_dong WHERE id = #{id};
+
+    </select>
+
+    <insert id="save" parameterType="com.yohaeng.gwangju.model.GwangjuDTO">
+        INSERT INTO location (id,title, zipcode, addr1, addr2, first_image, isimage, tel, description, areacode,
+        book_tour, cat1, cat2, cat3, contentid, mapx, mapy, mlevel, modifiedtime, sigungucode)
+        VALUES (null,#{title}, #{zipcode}, #{addr1}, #{addr2}, #{firstImage}, #{isImage}, #{tel}, #{description},
+        #{areacode}, #{bookTour}, #{cat1}, #{cat2}, #{cat3}, #{contentId}, #{mapX}, #{mapY}, #{mLevel}, #{modifiedTime},
+        #{sigunguCode})
+    </insert>
+
+
+    <update id="updateDong" parameterType="map">
+        UPDATE
+        <include refid="tableName"/>
+        SET addr1 = #{addr1}
+        WHERE id = #{id}
+    </update>
+
+    <!-- /map3/search에 대응하는 검색 쿼리 -->
+    <select id="searchByMap3KeywordAndSigungu" parameterType="map" resultType="com.yohaeng.gwangju.model.GwangjuDTO">
+        SELECT * FROM tour
+        <where>
+            <if test="params.keyword != null and params.keyword != ''">
+                AND (title LIKE CONCAT('%', #{params.keyword}, '%') OR addr1 LIKE CONCAT('%', #{params.keyword}, '%') OR addr2 LIKE CONCAT('%', #{params.keyword}, '%'))
+            </if>
+            <if test="params.sigunguCode != null and params.sigunguCode != ''">
+                AND sigunguCode = #{params.sigunguCode}
+            </if>
+        </where>
+        ORDER BY title ASC
+    </select>
+
+</mapper>

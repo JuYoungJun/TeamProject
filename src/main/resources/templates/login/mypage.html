@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+<!--    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .mypage-container {
+            width: 500px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            cursor: not-allowed;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-edit, .btn-delete {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .btn-edit:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+    </style>-->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .mypage-container {
+            width: 500px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 165, 0, 0.3);
+            border: 2px solid #ff9933;
+        }
+
+        h2 {
+            text-align: center;
+            color: #ff6600;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            color: #ff9933;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ff6600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ff9933;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #fff5e6;
+            cursor: not-allowed;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-edit, .btn-delete {
+            background-color: #ff6600;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .btn-edit:hover {
+            background-color: #e65c00;
+        }
+
+        .btn-delete {
+            background-color: #cc3300;
+        }
+
+        .btn-delete:hover {
+            background-color: #b32400;
+        }
+    </style>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:inline="javascript">
+        var csrfToken = /*[[${_csrf.token}]]*/ '';
+        var csrfHeader = /*[[${_csrf.headerName}]]*/ '';
+
+        var name = /*[[${name}]]*/ '';
+        var phone = /*[[${phone}]]*/ '';
+        var addressName = /*[[${addressName}]]*/ '';
+        var address1 = /*[[${address1}]]*/ '';
+        var address2 = /*[[${address2}]]*/ '';
+        var email = /*[[${email}]]*/ '';
+        var provider = /*[[${provider}]]*/ '';
+
+        // 소셜 로그인 이메일 확인 함수
+        function verifyEmail(email) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/verify-email-for-social',
+                    data: { email: email },
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader(csrfHeader, csrfToken);
+                    },
+                    success: function(response) {
+                        if (response) {
+                            resolve();
+                        } else {
+                            Swal.fire('실패', '이메일이 일치하지 않습니다.', 'error');
+                            reject();
+                        }
+                    },
+                    error: function() {
+                        Swal.fire('오류', '이메일 인증 중 오류가 발생했습니다.', 'error');
+                        reject();
+                    }
+                });
+            });
+        }
+
+        // 로컬 로그인 비밀번호 확인 함수
+        function verifyPassword(callback) {
+            Swal.fire({
+                title: '비밀번호 확인',
+                html: '<label class="swal2-label">비밀번호 입력:</label><input id="swal-password" class="swal2-input" type="password">',
+                showCancelButton: true,
+                confirmButtonText: '확인',
+                cancelButtonText: '취소',
+                preConfirm: () => {
+                    const password = document.getElementById('swal-password').value;
+                    return { password };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/verify-password',
+                        data: { password: result.value.password },
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader(csrfHeader, csrfToken);
+                        },
+                        success: function(response) {
+                            callback(response);
+                        }
+                    });
+                } else {
+                    callback(false);
+                }
+            });
+        }
+
+        // 수정 모달 열기 함수
+        function openEditGeneralInfoModal() {
+            Swal.fire({
+                title: '일반 정보 수정',
+                html:
+                    `<label class="swal2-label">이름:</label><input id="swal-name" class="swal2-input" value="${name}">` +
+                    `<label class="swal2-label">전화번호:</label><input id="swal-phone" class="swal2-input" value="${phone}">` +
+                    `<label class="swal2-label">주소 이름:</label><input id="swal-address-name" class="swal2-input" value="${addressName}">` +
+                    `<label class="swal2-label">주소 첫 줄:</label><input id="swal-address1" class="swal2-input" value="${address1}">` +
+                    `<label class="swal2-label">주소 상세:</label><input id="swal-address2" class="swal2-input" value="${address2}">`,
+                showCancelButton: true,
+                confirmButtonText: '저장',
+                cancelButtonText: '취소',
+                preConfirm: () => {
+                    const updatedName = document.getElementById('swal-name').value;
+                    const updatedPhone = document.getElementById('swal-phone').value;
+                    const updatedAddressName = document.getElementById('swal-address-name').value;
+                    const updatedAddress1 = document.getElementById('swal-address1').value;
+                    const updatedAddress2 = document.getElementById('swal-address2').value;
+                    return { updatedName, updatedPhone, updatedAddressName, updatedAddress1, updatedAddress2 };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/mypage/update',
+                        data: {
+                            name: result.value.updatedName,
+                            phone: result.value.updatedPhone,
+                            addressName: result.value.updatedAddressName,
+                            address1: result.value.updatedAddress1,
+                            address2: result.value.updatedAddress2,
+                            isPasswordVerified: provider === 'local',
+                            isEmailVerified: provider !== 'local'
+                        },
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader(csrfHeader, csrfToken);
+                        },
+                        success: function(response) {
+                            Swal.fire('저장 완료', '정보가 성공적으로 업데이트되었습니다.', 'success').then(() => {
+                                location.reload();
+                            });
+                        },
+                        error: function() {
+                            Swal.fire('저장 실패', '정보 수정에 실패했습니다.', 'error');
+                        }
+                    });
+                }
+            });
+        }
+
+        // 수정 버튼 클릭 시 처리
+        function editGeneralInfo() {
+            if (provider === 'local') {
+                verifyPassword(function(isVerified) {
+                    if (isVerified) {
+                        openEditGeneralInfoModal();
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: '이메일 확인',
+                    text: '소셜 로그인 사용자는 이메일을 입력해주세요.',
+                    input: 'email',
+                    inputPlaceholder: '이메일을 입력하세요',
+                    showCancelButton: true,
+                    confirmButtonText: '확인',
+                    cancelButtonText: '취소',
+                    preConfirm: (email) => {
+                        if (!email) {
+                            Swal.showValidationMessage('이메일을 입력해주세요.');
+                            return false;
+                        }
+                        return verifyEmail(email);
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        openEditGeneralInfoModal();
+                    }
+                });
+            }
+        }
+
+        // 회원 탈퇴 처리 함수
+        function deleteAccount() {
+            let emailInputHtml = provider !== 'local'
+                ? `<label class="swal2-label">이메일 입력:</label><input id="email-input" class="swal2-input" type="email" placeholder="소셜 로그인 이메일 확인">`
+                : '';
+
+            Swal.fire({
+                title: '회원 탈퇴',
+                html: `<p>정말로 탈퇴하시겠습니까?</p>` + emailInputHtml,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '탈퇴',
+                cancelButtonText: '취소',
+                preConfirm: () => {
+                    if (provider === 'local') {
+                        return new Promise((resolve, reject) => {
+                            verifyPassword((isVerified) => {
+                                if (isVerified) {
+                                    resolve();
+                                } else {
+                                    Swal.showValidationMessage('비밀번호가 일치하지 않습니다.');
+                                }
+                            });
+                        });
+                    } else {
+                        let email = document.getElementById('email-input').value;
+                        if (!email) {
+                            Swal.showValidationMessage('이메일을 입력해주세요.');
+                            return false;
+                        }
+                        return verifyEmail(email);
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    submitDeleteAccount(provider === 'local', provider !== 'local');
+                }
+            });
+        }
+
+        // 회원 탈퇴 요청 전송
+        function submitDeleteAccount(isPasswordVerified, isEmailVerified) {
+            $.ajax({
+                type: 'POST',
+                url: '/mypage/delete',
+                data: {
+                    isPasswordVerified: isPasswordVerified,
+                    isEmailVerified: isEmailVerified
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader(csrfHeader, csrfToken);
+                },
+                success: function(response) {
+                    Swal.fire('탈퇴 완료', '회원 탈퇴가 완료되었습니다.', 'success').then(() => {
+                        window.location.href = '/main';
+                    });
+                },
+                error: function() {
+                    Swal.fire('탈퇴 실패', '회원 탈퇴에 실패했습니다.', 'error');
+                }
+            });
+        }
+    </script>
+</head>
+<th:block th:replace="~{favicon :: head1}"></th:block>
+<body>
+<th:block th:replace="~{header :: header}"></th:block>
+
+<div class="mypage-container">
+    <h2>마이페이지</h2>
+
+    <div class="section">
+        <h3>일반 정보</h3>
+        <div class="input-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" th:value="${name}" disabled>
+        </div>
+        <div class="input-group">
+            <label for="phone">전화번호</label>
+            <input type="text" id="phone" th:value="${phone}" disabled>
+        </div>
+        <div class="input-group">
+            <label for="address-name">주소 이름</label>
+            <input type="text" id="address-name" th:value="${addressName}" disabled>
+        </div>
+        <div class="input-group">
+            <label for="address1">주소 첫 줄</label>
+            <input type="text" id="address1" th:value="${address1}" disabled>
+        </div>
+        <div class="input-group">
+            <label for="address2">주소 상세</label>
+            <input type="text" id="address2" th:value="${address2}" disabled>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>회원 정보</h3>
+        <div class="input-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" th:value="${email}" disabled>
+        </div>
+        <input type="hidden" id="provider" th:value="${provider}">
+
+        <div class="btn-container">
+            <button class="btn-edit" onclick="editGeneralInfo()">일반 정보 수정</button>
+            <button class="btn-delete" onclick="deleteAccount()">회원 탈퇴</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

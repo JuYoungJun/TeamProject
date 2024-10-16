@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yohaeng.gwangju.mapper.UserMapper">
+
+    <!-- 사용자 정보 저장 -->
+    <insert id="save" parameterType="com.yohaeng.gwangju.model.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users (email, name, phone_number, profile_image, password, created_at, verify, provider)
+        VALUES (#{email}, #{name}, #{phoneNumber}, #{profileImage}, #{password}, NOW(), #{verify}, #{provider})
+    </insert>
+
+    <!-- 사용자 정보 업데이트 (updated_at 수동 갱신) -->
+    <update id="update" parameterType="com.yohaeng.gwangju.model.User">
+        UPDATE users
+        SET name = #{name}, phone_number = #{phoneNumber}, profile_image = #{profileImage},
+        password = #{password}, updated_at = NOW(), provider = #{provider}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 사용자 정보 조회 (이메일로 조회) -->
+    <!--<select id="findByEmail" parameterType="String" resultType="com.yohaeng.gwangju.model.User">
+        SELECT * FROM testusers WHERE email = #{email} AND deleted_at IS NULL
+    </select>-->
+
+    <select id="findByEmail" parameterType="String" resultType="com.yohaeng.gwangju.model.User">
+        SELECT id, email, name, phone_number AS phoneNumber, profile_image, password, created_at, updated_at, deleted_at, verify, provider
+        FROM users
+        WHERE email = #{email} AND deleted_at IS NULL;
+    </select>
+
+    <!-- 사용자 정보 조회 (ID로 조회) -->
+    <select id="findById" parameterType="Long" resultType="com.yohaeng.gwangju.model.User">
+        SELECT * FROM users WHERE id = #{id} AND deleted_at IS NULL
+    </select>
+
+    <!-- 사용자 논리 삭제 (deleted_at 업데이트) -->
+    <update id="delete" parameterType="Long">
+        UPDATE users
+        SET deleted_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+</mapper>

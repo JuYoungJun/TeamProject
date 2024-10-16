@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>음식 리스트</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: #cccccc;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #content {
+            padding-top: 80px; /* 헤더 높이 조정 */
+        }
+
+        /* 검색창 스타일 조정 */
+        #search_box {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 검색 요소들이 한 줄로 나열되도록 설정 */
+        #searchGroup {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        /* 드롭다운 메뉴 스타일 */
+        select.form-control {
+            width: 150px; /* 드롭다운 너비 */
+            margin-right: 10px; /* 검색창과 드롭다운 사이 간격 */
+            height: 38px; /* 검색창과 높이 일치 */
+            border: 1px solid #6c757d; /* 상세보기 페이지와 색상 통일 */
+        }
+
+        /* 개별 드롭다운 박스 스타일 */
+        #searchType-gu, #sortType {
+            width: 150px;
+            margin-right: 10px;
+            height: 38px;
+        }
+
+        /* 키워드 입력창 스타일 */
+        #keyword {
+            width: 300px; /* 키워드 입력창의 너비 */
+            margin-right: 10px; /* 드롭다운과 키워드 입력창 사이 간격 */
+            height: 38px; /* 드롭다운과 높이 일치 */
+            border: 1px solid #6c757d; /* 상세보기 페이지와 색상 통일 */
+        }
+
+        /* 검색 버튼 스타일 */
+        .btn-search {
+            padding: 8px 20px;
+            background-color: #FFDA98;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            height: 38px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-search:hover {
+            background-color: #FFDA98;
+        }
+
+        /* 테이블 스타일 조정 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        thead th {
+            background-color: #FFDA98;
+            color: black;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #FFDA98;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        /* 검색 결과 및 개수 스타일 */
+        #resultCount {
+            text-align: center;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        /* 페이지네이션 스타일 */
+        .pagination {
+            justify-content: center;
+        }
+
+        .pagination .page-link {
+            color: #333;
+        }
+
+        .pagination .active .page-link {
+            background-color: #FFDA98; /* 상세보기 페이지와 색상 통일 */
+            color: white;
+            border: none;
+        }
+
+        .page-link:hover {
+            background-color: #FFDA98;
+            color: white;
+        }
+/* 각 열의 최대 글자수를 고려한 너비 설정 */
+    th:nth-child(1), td:nth-child(1) { /* 제목 */
+        width: 17%;
+    }
+    th:nth-child(2), td:nth-child(2) { /* 구 */
+        width: 7%; /* 최대 5자 */
+    }
+    th:nth-child(3), td:nth-child(3) { /* 상세주소 */
+        width: 35%; /* 상세 주소는 공간을 최대한 넓게 */
+    }
+    th:nth-child(4), td:nth-child(4) { /* 전화번호 */
+        width: 15%; /* 최대 15자 */
+    }
+    th:nth-child(5), td:nth-child(5) { /* 카테고리 */
+        width: 10%; /* 최대 10자 */
+    }
+    th:nth-child(6), td:nth-child(6) { /* 별점 */
+        width: 5%; /* 최대 5자 */
+    }
+    th:nth-child(7), td:nth-child(7) { /* 리뷰수 */
+        width: 10%; /* 최대 6자 */
+    }
+    </style>
+</head>
+<th:block th:replace="~{favicon :: head1}"></th:block>
+<!-- 헤더 삽입 -->
+<th:block th:replace="~{header :: header}"></th:block>
+
+<body>
+<div id="content" class="container mt-4">
+    <section>
+        <!-- 검색 박스 -->
+        <div id="search_box">
+            <form id="searchForm" th:action="@{/foodlist}" method="get" autocomplete="off">
+                <div id="searchGroup" class="form-row align-items-center">
+                    <!-- 구 선택 드롭박스 -->
+                    <div class="col-auto">
+                        <select id="searchType-gu" name="sigunguCode" title="구 별 선택" class="form-control">
+                            <option value="">전체 검색</option>
+                            <option value="1">광산구</option>
+                            <option value="2">남구</option>
+                            <option value="3">동구</option>
+                            <option value="4">북구</option>
+                            <option value="5">서구</option>
+                        </select>
+                    </div>
+
+                    <!-- 정렬 기준 드롭박스 (리뷰 순, 별점 순) -->
+                    <div class="col-auto">
+                        <select id="sortType" name="sortType" title="정렬 기준 선택" class="form-control">
+                            <option value="">정렬 기준</option>
+                            <option value="review">리뷰순</option>
+                            <option value="rating">별점순</option>
+                        </select>
+                    </div>
+
+                    <!-- 키워드 입력 -->
+                    <div class="col-auto">
+                        <input type="text" id="keyword" name="title" placeholder="키워드를 입력해 주세요." title="키워드 입력"
+                               class="form-control"/>
+                    </div>
+
+                    <!-- 검색 버튼 -->
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-search">검색</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- 검색 결과 개수 및 테이블 -->
+        <div id="resultCount" class="mt-4">총 <span th:text="${totalItems}">0</span>개 검색 결과</div>
+        <table class="table table-bordered mt-2">
+            <thead>
+            <tr>
+                <th scope="col">제목</th>
+                <th scope="col">구</th>
+                <th scope="col">상세주소</th>
+                <th scope="col">전화번호</th>
+                <th scope="col">카테고리</th>
+                <th scope="col">별점</th>
+                <th scope="col">리뷰수</th>
+            </tr>
+            </thead>
+            <tbody id="foodListBody">
+            <!-- 음식 리스트 출력 -->
+            <tr th:each="food : ${foodList}">
+                <td><a th:href="@{/fooddetail/{id}(id=${food.id})}" th:text="${food.title}">음식점 제목</a></td>
+                <td class="sigungu-code" th:text="${food.sigunguCode}"></td>
+                <td th:text="${food.addr1}"></td>
+                <td th:text="${food.tel}"></td>
+                <td th:text="${food.cat1}"></td>
+                <td th:text="${food.rating}"></td>
+                <td th:text="${food.reviewCnt}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 페이지네이션 -->
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li th:if="${currentPage > 1}" class="page-item">
+                    <a class="page-link"
+                       th:href="@{/foodlist(title=${title}, sigunguCode=${sigunguCode}, sortType=${sortType}, page=1, size=${size})}">처음</a>
+                </li>
+                <li th:if="${currentPage > 1}" class="page-item">
+                    <a class="page-link"
+                       th:href="@{/foodlist(title=${title}, sigunguCode=${sigunguCode}, sortType=${sortType}, page=${currentPage - 1}, size=${size})}">이전페이지</a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(((currentPage - 1) / 10) * 10 + 1, (((currentPage - 1) / 10) * 10) + 10 > totalPages ? totalPages : (((currentPage - 1) / 10) * 10) + 10)}"
+                    th:classappend="${currentPage == i} ? 'active'">
+                    <a class="page-link"
+                       th:href="@{/foodlist(title=${title}, sigunguCode=${sigunguCode}, sortType=${sortType}, page=${i}, size=${size})}"
+                       th:text="${i}"></a>
+                </li>
+                <li th:if="${currentPage < totalPages}" class="page-item">
+                    <a class="page-link"
+                       th:href="@{/foodlist(title=${title}, sigunguCode=${sigunguCode}, sortType=${sortType}, page=${currentPage + 1}, size=${size})}">다음페이지</a>
+                </li>
+                <li th:if="${currentPage < totalPages}" class="page-item">
+                    <a class="page-link"
+                       th:href="@{/foodlist(title=${title}, sigunguCode=${sigunguCode}, sortType=${sortType}, page=${totalPages}, size=${size})}">맨끝</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+</div>
+
+<script>
+    $(document).ready(function () {
+        const keyword = /*[[${title}]]*/ '';
+        const sigunguCode = /*[[${sigunguCode}]]*/ '';
+        const sortType = /*[[${sortType}]]*/ '';
+        $('#keyword').val(keyword ? keyword : '');
+        $('#searchType-gu').val(sigunguCode ? sigunguCode : '');
+        $('#sortType').val(sortType ? sortType : '');
+
+        const sigunguMapping = {
+            '1': '광산구',
+            '2': '남구',
+            '3': '동구',
+            '4': '북구',
+            '5': '서구'
+        };
+
+        $('.sigungu-code').each(function () {
+            const code = $(this).text();
+            $(this).text(sigunguMapping[code] || '알 수 없음');
+        });
+    });
+</script>
+<th:block th:replace="~{footer :: footer}"></th:block>
+</body>
+</html>

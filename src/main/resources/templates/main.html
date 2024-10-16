@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kor">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://travelwest.jp/cms/xmlrpc.php">
+
+	<title>광주광역시</title>
+
+
+
+
+	<link rel="https://api.w.org/" href="https://travelwest.jp/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://travelwest.jp/cms/xmlrpc.php?rsd" />
+	<meta name="generator" content="WordPress 6.4.5" />
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+	<noscript>
+		<style>.lazyload[data-src]{display:none !important;}</style>
+	</noscript>
+	<style>.lazyload{background-image:none !important;}.lazyload:before{background-image:none !important;}</style>
+	<style>.wp-block-gallery.is-cropped .blocks-gallery-item picture{height:100%;width:100%;}</style>
+	<link rel="icon" href="https://travelwest.jp/cms/wp-content/uploads/2020/04/cropped-favicon-32x32.png" sizes="32x32" />
+
+	<meta name="msapplication-TileImage" content="*" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<link rel="stylesheet" th:href="@{css/guide.css}">
+	<link rel="stylesheet" th:href="@{css/reset.css}">
+	<link rel="stylesheet" th:href="@{css/style.css}" media="screen and (min-width:800px)">
+	<link rel="stylesheet" th:href="@{css/style_info.css}">
+	<link rel="stylesheet" th:href="@{css/style-body.css}">
+
+
+	<style>
+		.mainV {
+			max-width: 1200px; /* 원하는 최대 너비 설정 */
+			margin: 0 auto; /* 좌우 여백을 자동으로 추가하여 가운데 정렬 */
+			padding: 0 20px; /* 좌우에 20px의 패딩 추가 */
+		}
+
+	</style>
+
+
+
+</head>
+<th:block th:replace="~{favicon :: head1}"></th:block>
+
+<body class="home blog wp-embed-responsive">
+
+
+
+<div id="page">
+
+	<th:block th:replace="~{header :: header}"></th:block>
+	<div id="top">
+		<div class="mainV clearfix">
+
+			<div class="box main1" th:if="${#lists.size(items) > 0}">
+				<a th:href="@{${items[0].home}}" target="_blank">
+					<img th:src="@{${items[0].firstImage}}" sizes="(max-width: 500px) 100vw, 500px" width="100%"  th:alt="${items[0].title}">
+					<p class="name" th:text="${items[0].title}"></p>
+					<div class="overlay">
+						<p th:text="${items[0].title}"></p>
+					</div>
+				</a>
+			</div>
+
+			<div class="box main2" th:if="${#lists.size(items) > 1}">
+				<a th:href="@{${items[1].home}}" target="_blank">
+					<img th:src="@{${items[1].firstImage}}" sizes="(max-width: 500px) 100vw, 500px" width="100%"  th:alt="${items[1].title}">
+					<p class="name" th:text="${items[1].title}"></p>
+					<div class="overlay">
+						<p th:text="${items[1].title}"></p>
+					</div>
+				</a>
+			</div>
+
+			<div class="box main3" th:if="${#lists.size(items) > 2}">
+				<a th:href="@{${items[2].home}}" target="_blank">
+					<img th:src="@{${items[2].firstImage}}" sizes="(max-width: 400px) 100vw, 400px" width="100%" th:alt="${items[2].title}">
+					<p class="name" th:text="${items[2].title}"></p>
+					<div class="overlay">
+						<p th:text="${items[2].title}"></p>
+					</div>
+				</a>
+			</div>
+
+			<div class="box main4" th:if="${#lists.size(items) > 3}">
+				<a th:href="@{${items[3].home}}" target="_blank">
+					<img th:src="@{${items[3].firstImage}}" sizes="(max-width: 400px) 100vw, 400px" width="100%"  th:alt="${items[3].title}">
+					<p class="name" th:text="${items[3].title}"></p>
+					<div class="overlay">
+						<p th:text="${items[3].title}"></p>
+					</div>
+				</a>
+			</div>
+
+			<div class="box main5" th:if="${#lists.size(items) > 4}">
+				<a th:href="@{${items[4].home}}" target="_blank">
+					<img th:src="@{${items[4].firstImage}}" sizes="(max-width: 400px) 100vw, 400px" width="100% " th:alt="${items[4].title}">
+					<p class="name" th:text="${items[4].title}"></p>
+					<div class="overlay">
+						<p th:text="${items[4].title}"></p>
+					</div>
+				</a>
+			</div>
+
+		</div>
+
+		<div class="buttonarea" style="margin-bottom: 50px">
+			<a href="map">광주랜덤여행</a>
+		</div>
+
+
+
+
+
+
+
+
+
+		<div class="_bg_gray">
+
+
+
+<!--			 두번째 시작-->
+
+			<div class="feature w1096">
+				<div class="inner overseas" id="overseas">
+					<div class="txtBox">
+						<p>전라도는 식도락의 천국, 특색 있는 전통 음식이 가득합니다.</p>
+						<p>광주에서 맛과 경치를 동시에 즐기는 완벽한 여행.</p>
+						<p>다양한 맛집들이 기다리고 있으니, 미식의 향연을 경험해 보세요.</p>
+						<p>맛과 멋이 어우러진 광주의 매력에 빠져보세요!</p>
+					</div>
+					<div class="imgBox">
+
+						<div class="item img1 animateConts" th:if="${#lists.size(foods) > 0}">
+							<a href="#" >
+								<div class="thumb">
+
+									<img th:src="@{${foods[0].image}}"  sizes='(max-width: 300px) 100vw, 300px'  width="100%" alt="" >
+
+
+								</div>
+								<div class="overlay">
+									<div class="txt">
+										<h6 th:text="${foods[0].title}"></h6>
+										<!-- <p class="qsmd">Fukuoka</p> -->
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="item img2 animateConts" th:if="${#lists.size(foods) > 1}">
+							<a href="#">
+								<div class="thumb">
+									<img th:src="@{${foods[1].image}}"  sizes='(max-width: 300px) 100vw, 300px'  width="100%" alt="" >
+								</div>
+								<div class="overlay">
+									<div class="txt">
+										<h6 th:text="${foods[1].title}"></h6>
+										<!-- <p class="qsmd">Fukuoka</p> -->
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="item img3 animateConts" th:if="${#lists.size(foods) > 2}">
+							<a href="#">
+								<div class="thumb">
+									<img th:src="@{${foods[2].image}}"  sizes='(max-width: 300px) 100vw, 300px'  width="100%" alt="" >
+								</div>
+								<div class="overlay">
+									<div class="txt">
+										<h6 th:text="${foods[2].title}"></h6>
+										<!-- <p class="qsmd">Fukuoka</p> -->
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="item img4 animateConts" th:if="${#lists.size(foods) > 3}">
+							<a href="#">
+								<div class="thumb">
+									<img th:src="@{${foods[3].image}}"  sizes='(max-width: 300px) 100vw, 300px'  width="100%" alt="" >
+								</div>
+								<div class="overlay">
+									<div class="txt">
+										<h6 th:text="${foods[3].title}"></h6>
+										<!-- <p class="qsmd">Fukuoka</p> -->
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="buttonarea">
+					<a href="food" style="margin-bottom: 50px">맛집탐방</a>
+				</div>
+
+				<div class="ttlBox">
+					<p class="qsmd">Transport</p>
+					<h2>광주 오는길</h2>
+				</div>
+				<div class="inner domestic" id="domestic">
+					<div class="txtBox">
+						<h3>광주로!!</h3>
+						<p>광주의 랜드마크 광주 유스퀘어 종합버스터미널</p>
+						<p>아름다운 문화가 공존하는 광주공항</p>
+						<p>광주에서 가장 큰 철도역이었으나, 호남고속선의 등장으로 몰락해 버린 광주역</p>
+						<p>작은 양곡창고 자리가 광주전남 교통의 핵심으로 광주송정역</p>
+					</div>
+					<div class="imgBox">
+						<div class="item img1 animateConts">
+							<a href="https://www.usquare.co.kr/" target = "_blank">
+								<div class="thumb">
+									<img th:src="@{images/transport/유스퀘어.jpg}"  sizes='(max-width: 300px) 100vw, 300px'  width="100%" alt="" >
+								</div>
+								<div class="overlay">
+									<div class="txt">
+										<h6>유스퀘어 광주종합버스터미널</h6>
+										<!-- <p class="qsmd">Fukuoka</p> -->
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="item img2 animateConts">
+							<a href="https://www.airport.co.kr/gwangju/index.do" target = "_blank">
+								<div class="thumb">
+									<img th:src="@{images/transport/광주공항.jpg}"  sizes='(max-width: 300px) 100vw, 300px'  width="100%" alt="" >
+								</div>
+								<div class="overlay">
+									<div class="txt">
+										<h6>광주공항</h6>
+										<!-- <p class="qsmd">Fukuoka</p> -->
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="item img3 animateConts">
+							<a href="https://www.letskorail.com/ebizprd/stationKtxViewMap.do?searchCondition=ktx4&stationSeq=10279661&znCd=" target = "_blank">
+								<div class="thumb">
+									<img th:src="@{images/transport/광주송정역.jpg}"  sizes='(max-width: 300px) 100vw, 300px'  width="100%" alt="" >
+								</div>
+								<div class="overlay">
+									<div class="txt">
+										<h6>광주송정역</h6>
+										<!-- <p class="qsmd">Fukuoka</p> -->
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="item img4 animateConts">
+							<a href="https://www.letskorail.com/ebizprd/stationMainView.do?stationSeq=10279704&searchCondition=main5&znCd=V191" target = "_blank">
+								<div class="thumb">
+									<img th:src="@{images/transport/광주역.jpg}"  sizes='(max-width: 300px) 100vw, 300px'  width="100%" alt="" >
+								</div>
+								<div class="overlay">
+									<div class="txt">
+										<h6>광주역</h6>
+										<!-- <p class="qsmd">Fukuoka</p> -->
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+
+			<!--	<div class="buttonarea">
+					<a href="https://travelwest.jp/domestic/list">두번째이미지버튼</a>
+				</div>-->
+
+
+			</div>
+		</div>
+		<div class="ttlBox" id="company">
+			<p class="qsmd">Major Event</p>
+			<h2>이 달의 행사</h2>
+		</div>
+		<div class="company w1000 clearfix">
+			<div class="item animateConts3">
+				<a href="https://blog.naver.com/gjgjcf" title="2024 광주 프린지페스티벌 " target = "_blank">
+					<img th:src="@{images/fes/fes1.jpg}"   width="300" alt="" >
+					<p class="title">2024 광주국제미술전람회</p>
+
+				</a>
+			</div>
+
+			<div class="item animateConts3">
+				<a href="http://fringefestival.kr/" title="2024 광주 프린지페스티벌 " target = "_blank">
+					<img th:src="@{images/fes/fes2.jpg}"   width="300" alt="" >
+					<p class="title">2024 광주비엔날레</p>
+
+				</a>
+			</div>
+			<div class="item animateConts3">
+				<a href="http://fringefestival.kr/" title="2024 광주 프린지페스티벌 " target = "_blank">
+					<img th:src="@{images/fes/fes3.jpg}"   width="300" alt="" >
+					<p class="title">2024 광주 프린지페스티벌</p>
+
+				</a>
+			</div>
+
+
+		</div>
+
+
+		<div class="ttlBox">
+			<p class="qsmd">프로젝트 팀 소개</p>
+			<h2>우리 팀을 소개합니다</h2>
+		</div>
+		<div class="news w714 fadeConts" id="news">
+			<div class="left">
+				<!-- 팀장 -->
+				<dl class="team-member">
+					<dt class="qsmd"><span class="label info">팀장</span></dt>
+					<dd>
+						<a href="https://github.com/JuYoungJun">
+							<strong>주영준</strong> - 전체 프로젝트 관리 및 프로젝트 총괄
+						</a>
+					</dd>
+				</dl>
+
+				<!-- 백엔드 개발 -->
+				<dl class="team-member">
+					<dt class="qsmd"><span class="label info">조원</span></dt>
+					<dd>
+						<a href="https://github.com/mintchoco0001">
+							<strong>김희재</strong> - 데이터베이스 관리
+						</a>
+					</dd>
+				</dl>
+
+				<!-- 프론트엔드 개발 -->
+				<dl class="team-member">
+					<dt class="qsmd"><span class="label campaign">조원</span></dt>
+					<dd>
+						<a href="https://github.com/joojooGit">
+							<strong>주의진</strong> - CSS 및 로고 제작
+						</a>
+					</dd>
+				</dl>
+
+				<!-- UI/UX 디자인 -->
+				<dl class="team-member">
+					<dt class="qsmd"><span class="label info">조원</span></dt>
+					<dd>
+						<a href="https://github.com/Boksill2">
+							<strong>김은호</strong> - 화면 설계 및 사용자 경험 디자인
+						</a>
+					</dd>
+				</dl>
+			</div>
+
+			<!-- 프로젝트 추가 정보 버튼 -->
+			<div class="buttonarea">
+				<a href="#" class="btn-more">프로젝트 더 알아보기</a>
+			</div>
+		</div>
+
+		<div class="_bg_gray">
+			<div class="instagram w1096">
+				<div class="ttl">
+					<p><picture><source   type="image/webp" data-srcset="https://travelwest.jp/cms/wp-content/themes/travelwest-theme/assets/img/top/ttl_instagram@2x.png.webp"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbwAAABnAQAAAABTRcoqAAAAAnRSTlMAAHaTzTgAAAAcSURBVBgZ7cEBDQAAAMIg+6d+DjdgAAAAAADwLxbvAAGiCWGRAAAAAElFTkSuQmCC" width="222" alt="Instagram" loading="lazy" data-eio="p" data-src="https://travelwest.jp/cms/wp-content/themes/travelwest-theme/assets/img/top/ttl_instagram@2x.png" decoding="async" class="lazyload" data-eio-rwidth="444" data-eio-rheight="103"><noscript><img src="https://travelwest.jp/cms/wp-content/themes/travelwest-theme/assets/img/top/ttl_instagram@2x.png" width="222" alt="Instagram" loading="lazy" data-eio="l"></noscript></picture></p>
+					<p class="btn"><a href="https://www.instagram.com/travelwestjapan/" target="_blank"><picture><source   type="image/webp" data-srcset="https://travelwest.jp/cms/wp-content/themes/travelwest-theme/assets/img/top/btn_instagram@2x.png.webp"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAA0AQAAAADnc0pRAAAAAnRSTlMAAHaTzTgAAAATSURBVBgZYxgFo2AUjIJRQBEAAAVIAAHf9afIAAAAAElFTkSuQmCC" width="100" alt="FOLLOW ME" data-eio="p" data-src="https://travelwest.jp/cms/wp-content/themes/travelwest-theme/assets/img/top/btn_instagram@2x.png" decoding="async" class="lazyload" data-eio-rwidth="200" data-eio-rheight="52"><noscript><img src="https://travelwest.jp/cms/wp-content/themes/travelwest-theme/assets/img/top/btn_instagram@2x.png" width="100" alt="FOLLOW ME" data-eio="l"></noscript></picture></a></p>
+				</div>
+				<div class="clearfix">
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+<script th:src="@{js/script.js}"></script>
+
+<script type="text/javascript">
+
+
+</script>
+</div>
+<div th:replace="~{footer :: footer}"></div>
+
+
+
+</body>
+
+</html>

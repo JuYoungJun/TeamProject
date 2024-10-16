@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>광주 지역 지도 표시</title>
+</head>
+
+<body th:fragment="content">
+<div id="map" style="width:100%;height:700px;"></div>
+<script src="/js/button.js"></script>
+<script src="/js/sidebar.js"></script>
+
+<script th:inline="javascript">
+  var locations = /*[[${list}]]*/;
+  var locations2 = /*[[${list2}]]*/;
+
+  var gu = [[${guName}]];
+  var dong = [[${dongName}]];
+  var centerLat = parseFloat([[${centerLat}]]);
+  var centerLng = parseFloat([[${centerLng}]]);
+  var sigunguCode = /*[[${sigunguCode}]]*/ || 0;
+
+  console.log(locations, locations2, gu, dong, centerLat, centerLng);
+
+
+    console.log("Initializing map...");
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: centerLat, lng: centerLng },
+      zoom: 13
+    });
+
+    // 관광지 리스트에 따른 마커 표시
+    locations.forEach(function (location) {
+      var markerPosition = { lat: location.mapY, lng: location.mapX };
+      var marker = new google.maps.Marker({
+        position: markerPosition,
+        map: map,
+        title: location.title
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+        content: `
+          <div style="padding:10px; width: 200px; box-sizing: border-box; font-size: 14px;">
+            <b style="display: block; margin-bottom: 5px;">${location.title}</b>
+            <img src="${location.firstImage}" alt="Image" style="width:100%;max-width:200px;height:auto;border-radius: 5px;margin-bottom: 10px;">
+            <p style="margin: 0 0 5px; white-space: pre-line; font-size: 13px;">${location.addr1}<br>${location.addr2}</p>
+            <p style="margin: 0; padding: 5px; background-color: #f0f0f0; border-radius: 5px; text-align: center; font-size: 13px;">Tel: ${location.tel}</p>
+          </div>`
+      });
+
+      marker.addListener('mouseover', function () {
+        infoWindow.open(map, marker);
+      });
+
+      marker.addListener('mouseout', function () {
+        infoWindow.close();
+      });
+
+      marker.addListener('click', function () {
+        var id = location.id;
+        sidebarData(id);
+      });
+    });
+
+    // GeoJSON 폴리곤 그리기
+    $.ajax({
+      url: 'geojson/' + gu + '/' + dong + '.geojson',
+      type: 'GET',
+      dataType: 'json',
+      success: function (geojson) {
+        var polygons = [];
+        var bounds = new google.maps.LatLngBounds();
+
+        geojson.features.forEach(function (feature) {
+          var coords = feature.geometry.coordinates[0][0].map(function (coord) {
+            return { lat: coord[1], lng: coord[0] };
+          });
+
+          var polygon = new google.maps.Polygon({
+            paths: coords,
+            strokeColor: '#004c80',
+            strokeOpacity: 0.1,
+            strokeWeight: 3,
+            fillColor: '#000000',
+            fillOpacity: 0.2,
+            map: map
+          });
+
+          polygons.push(polygon);
+          coords.forEach(function (coord) {
+            bounds.extend(coord);
+          });
+        });
+
+        map.fitBounds(bounds);
+
+        polygons.forEach(function (polygon) {
+          google.maps.event.addListener(polygon, 'mouseover', function () {
+            polygon.setOptions({ fillOpacity: 0.001 });
+          });
+
+          google.maps.event.addListener(polygon, 'mouseout', function () {
+            polygon.setOptions({ fillOpacity: 0.2 });
+          });
+        });
+      },
+      error: function (xhr, status, error) {
+        console.error('GeoJSON 파일을 불러오는 데 실패했습니다.', error);
+      }
+    });
+
+</script>
+
+<div class="buttons">
+  <button id="button1" onclick="goMap1()">광주지도</button>
+  <button id="button2" th:if="${dongName != null}" onclick="goMap2(sigunguCode)">구지도</button>
+</div>
+</body>
+</html>

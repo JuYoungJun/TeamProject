@@ -1,0 +1,1790 @@
+@charset "utf-8";
+
+/* body {position: relative;} */
+
+.only_w {display: block !important;}
+.only_m {display: none !important;}
+
+
+
+
+@media screen and (max-width: 850px) {
+
+    .only_w {display: none !important;}    
+    .only_m {display: block !important;}
+
+
+}
+
+
+.main {
+    display: flex;
+}
+
+
+span.ico {
+    display: block;
+    width: 48px; height: 48px;
+    border-radius: 16px;
+    background: #333333 no-repeat center;
+    margin-right: 18px;
+    flex: 0 0 auto;
+}
+
+
+
+
+.main .map_contact_wrap {
+    display: flex;
+    width: 49%;
+    min-width: 937px;
+    flex: 0 0 auto;
+    max-height: 100vh;
+}
+
+.main .map_contact_wrap.fixed {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+.main .map_contact_wrap.fixed{}
+.map_contact {
+    background:  #fbbc39;
+    padding: 60px 0 30px 60px;
+    box-sizing: border-box;
+    width: 52.6%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    z-index: 10;
+}
+
+.map_contact .main_top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right:30px;
+    padding-bottom: 60px;
+}
+
+.main .logo {
+    display: flex;
+    align-items: center;
+}
+.main .logo a {
+    display: block;
+    background: no-repeat center / cover;
+    font-size: 0;
+    color: transparent;
+}
+.main .logo .logo1  {
+    width: 190px; height: 48px;
+    background-image: url(../images/common/logo_01.png);
+}
+.main .logo .logo2  {
+    width: 130px; height: 48px;
+    background-image: url(../images/common/logo_02.png);
+}
+.main .logo span {
+    display: block;
+    width: 16px; height: 18px;
+    background: no-repeat center / 16px auto;
+    background-image: url(../images/common/logo_and.png);
+    margin: 0 8px;
+}
+
+.map_contact .title_box  {
+    z-index: 10;
+    position: relative;
+}
+
+.map_contact .title_box h3{
+    font-size: 26px;
+    font-weight: 500;
+    color: #fff;
+    padding-bottom:24px ;
+}
+.map_contact .title_box h3 span {
+    color: #3e664b;
+    font-weight: 800;
+}
+.map_contact .title_box h2 {
+    font-size: 52px;
+    font-weight: 900;
+    color: #3e664b;
+    line-height: 1.3;
+}
+.map_contact .map_img {
+    margin-top: 80px;
+    position: relative;
+    padding-right: 60px;
+}
+.map_contact .map_img::after {
+    content: '';
+    width: 446px; height: 565px;
+    background: no-repeat center ;
+    background-image: url(../images/main/main_map_area.png);
+    position: absolute;
+    top: -242px; left:-60px;
+    display: block;
+    z-index: -1;
+}
+.map_contact .map_bg {
+    width: 395px;
+    height: 570px;
+    background: no-repeat center ;
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+    transition: all 0.3s;
+}
+.map_contact  .map_bg.seoul {
+    background-image:url(../images/main/main_map_seoul.png) !important ;
+}
+.map_contact  .map_bg.incheon {
+    background-image:url(../images/main/main_map_incheon.png) !important ;
+}
+.map_contact  .map_bg.gyeonggi {
+    background-image:url(../images/main/main_map_gyeonggi.png) !important ;
+}
+.map_contact  .map_bg.gangwon {
+    background-image:url(../images/main/main_map_gangwon.png) !important ;
+}
+.map_contact  .map_bg.chungnam {
+    background-image:url(../images/main/main_map_chungnam.png) !important ;
+}
+.map_contact  .map_bg.chungbuk {
+    background-image:url(../images/main/main_map_chungbuk.png) !important ;
+}
+.map_contact  .map_bg.daejeon {
+    background-image:url(../images/main/main_map_daejeon.png) !important ;
+}
+.map_contact  .map_bg.sejong {
+    background-image:url(../images/main/main_map_sejong.png) !important ;
+}
+.map_contact  .map_bg.daegu {
+    background-image:url(../images/main/main_map_daegu.png) !important ;
+}
+.map_contact  .map_bg.gwangju {
+    background-image:url(../images/main/main_map_gwangju.png) !important ;
+}
+.map_contact  .map_bg.jeonnam {
+    background-image:url(../images/main/main_map_jeonnam.png) !important ;
+}
+.map_contact  .map_bg.jeonbuk {
+    background-image:url(../images/main/main_map_jeonbuk.png) !important ;
+}
+.map_contact  .map_bg.gyeongbuk {
+    background-image:url(../images/main/main_map_gyeongbuk.png) !important ;
+}
+.map_contact  .map_bg.gyeongnam {
+    background-image:url(../images/main/main_map_gyeongnam.png) !important ;
+}
+.map_contact  .map_bg.ulsan {
+    background-image:url(../images/main/main_map_ulsan.png) !important ;
+}
+.map_contact  .map_bg.busan {
+    background-image:url(../images/main/main_map_busan.png) !important ;
+}
+.map_contact  .map_bg.Jeju {
+    background-image:url(../images/main/main_map_Jeju.png) !important ;
+}
+
+
+
+
+
+
+
+
+
+
+.map_contact .map_pin_cont {
+    position: absolute;
+
+}
+.map_contact .map_pin_cont  a {
+    display: flex;
+    position: relative;
+}
+.map_contact .map_pin_cont  i {
+    width:34px ; height: 44px;
+    background: no-repeat center;
+    background-image: url(../images/main/map_pin_off_02.png);
+    position: relative;
+}
+
+.map_contact .map_pin_cont.on  i,
+.map_contact .map_pin_cont:hover  i {
+    background-image: url(../images/main/map_pin_on.png);
+}
+.map_contact .map_pin_cont span {
+    display: none;
+}
+.map_contact .map_pin_cont:hover span,
+.map_contact .map_pin_cont.on span {
+    padding:14px 16px ;
+    display: block;
+    background:#f88222 ;
+    border-radius:15px ;
+    position: absolute;
+    top: -64px; left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    display: block;
+    z-index: 11;
+}
+.map_contact .map_pin_cont:hover span::after,
+.map_contact .map_pin_cont.on span::after {
+    content: '';
+    display: block;
+    width: 18px; height: 7px;
+    position: absolute;
+    top: 100%;left: 50%;
+    transform: translateX(-50%);
+    background: no-repeat center;
+    background-image: url(../images/main/map_after.png);
+}
+
+/* .map_contact .map_pin_cont:hover i::before, */
+.map_contact .map_pin_cont.on i::before {
+    content: '';
+    position: absolute;
+    bottom:-6px; left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: 24px; height: 11px;
+    background: #35523e;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.map_contact .foot_info_wrap {
+    padding-top:67px ;
+    display: flex !important;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.btn_box {
+    display: flex;
+    /*     margin-right: 30px; */
+
+}
+.btn_box a {
+    padding: 0 10px;
+    height: 34px;
+    border-radius: 8px ;
+    color: #fbbc39;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+    font-size:12px;
+    display: flex;
+    background:#3e664b  no-repeat center ;
+}
+.btn_box a + a {
+    margin-left:6px ;
+}
+.btn_box a i {
+    display: block;
+    background: no-repeat center;
+    margin-right: 5px;
+}
+
+.btn_box a.wish_btn i  {
+    width: 14px; height: 12px;
+    background-size: 14px;
+    background-image: url(../images/main/heart_btn.png);
+}
+.btn_box a.shere_btn i {
+    width: 14px; height: 14px;
+    background-size: 14px;
+    background-image: url(../images/main/shere_btn.png);
+}
+
+
+.map_contact .foot_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+.map_contact .foot_info * {
+    font-size: 12px ;
+    color: #fff;
+}
+.map_contact .foot_info  p {
+    padding-bottom:7px ;
+}
+.map_contact .foot_info .address span {
+    display: block;
+    line-height: 1.33;
+}
+
+
+
+
+.map_county {
+    width:47.4% ;
+    display: flex;
+    min-height: 100vh;
+}
+.map_line {
+    width: 24px ; height: 100%;
+    background: repeat center ;
+    background-image: url(../images/main/main_line.png);
+    flex: 0 0 auto;
+    box-shadow: 3px 0px 32px 0px rgba(0, 0, 0, 0.34);
+}
+.map_county.map_visual {
+    background: no-repeat center / cover;
+}
+.gangwon .map_county.map_visual {
+    background-image: url(../images/main/main_bg.png)
+}
+.seoul .map_county.map_visual {
+    background-image: url(../images/main/main_visual_seoul.png)
+}
+.gyeonggi .map_county.map_visual {
+    background-image: url(../images/main/main_visual_gyeonggi.png)
+}
+.incheon .map_county.map_visual {
+    background-image: url(../images/main/main_visual_incheon.png)
+}
+.chungnam .map_county.map_visual {
+    background-image: url(../images/main/main_visual_chungnam.png)
+}
+.chungbuk .map_county.map_visual {
+    background-image: url(../images/main/main_visual_chungbuk.png)
+}
+.daejeon .map_county.map_visual {
+    background-image: url(../images/main/main_visual_daejeon.png)
+}
+.sejong .map_county.map_visual {
+    background-image: url(../images/main/main_visual_sejong.png)
+}
+.daegu .map_county.map_visual {
+    background-image: url(../images/main/main_visual_daegu.png)
+}
+.gwangju .map_county.map_visual {
+    background-image: url(../images/main/main_visual_gwangju.png)
+}
+.jeonnam .map_county.map_visual {
+    background-image: url(../images/main/main_visual_jeonnam.png)
+}
+.jeonbuk .map_county.map_visual {
+    background-image: url(../images/main/main_visual_jeonbuk.png)
+}
+.gyeongbuk .map_county.map_visual {
+    background-image: url(../images/main/main_visual_gyeongbuk.png)
+}
+.gyeongnam .map_county.map_visual {
+    background-image: url(../images/main/main_visual_gyeongnam.png)
+}
+.busan .map_county.map_visual {
+    background-image: url(../images/main/main_visual_busan.png)
+}
+.ulsan .map_county.map_visual {
+    background-image: url(../images/main/main_visual_ulsan.png)
+}
+.Jeju .map_county.map_visual {
+    background-image: url(../images/main/main_visual_Jeju.png)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.map_county .map_item {
+    padding: 170px 20px 20px 49px ;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.map_item .city_txt {
+    font-size: 32px;
+    color: #fff;
+    font-weight: 200;
+    margin-bottom: 20px;
+}
+.map_item .toggle_down {
+    position: relative;
+
+}
+.map_item .toggle_down .now_txt {
+    font-size: 52px;
+    font-weight: 700;
+    color: #fff;
+    border-bottom: 4px solid #fff ;
+    line-height: 90px;
+    display: flex;
+    align-items: center;
+    width: 250px;
+}
+.map_item .toggle_down .now_txt i {
+    display: block;
+    width: 16px; height: 11px;
+    background: no-repeat center ;
+    background-image: url(../images/main/sel_ico.png);
+    margin-left: auto;
+    margin-right:12px ;
+}
+.map_item .toggle_down .drop_wrap {
+    background: #fff ;
+    padding: 15px 10px 15px 0;
+    border: 2px solid #eeeeee;
+    border-radius: 16px;
+    box-shadow: 0px 10px 50.76px 3.24px rgba(0, 0, 0, 0.11);
+    position: absolute;
+    width: 270px ;
+    top:calc(100% + 15px ); left: 0;
+    display: none;
+    z-index: 10;
+}
+.map_item .toggle_down .drop_menu {
+    max-height:354px ;
+    overflow-y: auto;
+}
+.map_item .toggle_down .drop_wrap li button {
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    padding-left: 26px;
+    line-height: 58px;
+    text-align: left;
+}
+.map_item .toggle_down .drop_wrap li.on button,
+.map_item .toggle_down .drop_wrap li button:hover {
+    background: #fafafa;
+}
+.map_item .county_top p {
+    font-size:17px ;
+    font-weight: 300;
+    line-height: 57px;
+    color: #fff;
+    position: relative;
+}
+.map_item .county_top p::after {
+    content: '';
+    position: absolute;
+    bottom: 0 ; left: 0;
+    display: block;
+    width: 250px; height: 1px;
+    background: rgba(255,255,255,0.5);
+}
+.map_item .rank_txt {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto ;
+}
+.map_item .rank_txt strong {
+    display: block;
+    font-size:18px ;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'NanumSquare';
+    margin-bottom:16px ;
+}
+.map_item .rank_txt span {
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.33;
+}
+
+
+
+
+.main .city_ranking {
+    width: 51%;
+
+    /* max-height: 1200px; */
+    min-height: 100vh;
+    height: 100%;
+    margin-left: auto;
+
+    /* overflow-y: scroll; */
+    /* -ms-overflow-style: none; */
+}
+.main .city_ranking::-webkit-scrollbar{
+    /* display:none; */
+}
+.main .city_ranking .rank_item {
+    padding:50px  0 0 ;
+    background: #464646;
+}
+.city_ranking .rank_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+}
+
+.rank_top .rank_tit {
+    display: flex;
+    align-items: center;
+}
+.rank_top .rank_tit h4 {
+    font-size: 46px;
+    font-weight: 700;
+    margin-right: 18px;
+    color: #fff;
+}
+.rank_top .rank_tit h4 span {
+    color: #fbbc39;
+}
+.rank_top .rank_tit > span {
+    color: #fff;
+    font-weight: 350;
+    line-height: 1.25;
+}
+.rank_top  a {
+    font-size: 18px;
+    display:flex;
+    align-items: center;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #fff;
+    margin-right:28px;
+    color: #fff;
+
+}
+.rank_top  a  i {
+    margin-left: 4px;
+}
+
+.sortwrap{padding: 30px 60px; width: 100%;}
+.sortwrap ul{display: flex;}
+.sortwrap ul li{border: 1px solid #fff; border-radius: 10px; margin-right: 10px; height: 44px;}
+.sortwrap ul li:last-child{margin-right: 0;}
+.sortwrap ul li.on{background-color: #fff;}
+.sortwrap ul li button{font-size: 18px; color: #fff; width: 100%; height: 100%; padding: 0 20px;}
+.sortwrap ul li.on button{color: #000;}
+
+.tab_cont {
+    padding: 0 60px 40px;
+    display: flex;
+    width: 100%;
+}
+.tab_cont .label {
+    font-size: 30px;
+    color:  #fbbc39;
+    font-weight: 900;
+    font-family: 'NanumSquare';
+    display: block;
+    padding-bottom:20px ;
+}
+
+
+.tab_cont .tab_box {
+    width: calc(50% - 10px);
+    margin-right: 20px;
+}
+
+.tab_cont .tab_box.out {
+    margin-right: 0;
+}
+.tab_cont .rank_list li {
+    display: flex;
+    background: #fff;
+    border-radius:16px ;
+    padding: 16px 12px ;
+    cursor: pointer;
+    height: 83px;
+}
+.tab_cont .rank_list li:hover {
+    background: #e9f3ec;
+}
+.tab_cont .rank_list li+li {
+    margin-top:10px ;
+}
+.tab_cont .rank_list li .list_num {
+    width: 48px; height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    flex: 0 0 auto;
+
+}
+.tab_cont .rank_list li.ranking_top .list_num {
+    flex-direction: column;
+    /* color: #0d84dc */
+}
+/* .tab_cont .rank_list li.ranking_top .list_num i{
+    width: 14px ; height: 11px;
+    background: no-repeat center;
+    margin-bottom: 6px;
+}
+
+.tab_cont .rank_list li.num_1st .list_num i {
+    background-image: url(../images/ico/ico_1st.png);
+}
+.tab_cont .rank_list li.num_2nd .list_num i {
+    background-image: url(../images/ico/ico_2nd.png);
+}
+.tab_cont .rank_list li.num_3rd .list_num i {
+    background-image: url(../images/ico/ico_3rd.png);
+}
+ */
+
+
+
+
+
+
+
+.tab_cont .location_area  {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: calc(100% - 130px);
+}
+.tab_cont .location_area a {
+    display: flex;
+    align-items: center;
+    padding-bottom:4px ;
+}
+.tab_cont .location_area p {
+    word-break: break-all;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+}
+.tab_cont .location_area a p {
+    font-size:20px ;
+    font-weight: 500;
+    border-bottom: 1px solid #252525;
+    display: block;
+    align-items: center;
+    padding-bottom: 2px;
+    line-height: 1.2;
+
+}
+.tab_cont .location_area a i {
+    width:11px ; height: 11px;
+    display: block;
+    margin-left: 6px;
+    background: url(../images/main/rank_ico.png) no-repeat center;
+    flex: 0 0 auto;
+}
+
+.tab_cont .location_area .add {
+    font-size:15px ;
+    color: #757575;
+    line-height: 1.3;
+    word-break: break-all;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.rank_ratio {
+    background:#f5f4f9 ;
+    width: 100%;
+    padding: 74px 60px 50px;
+}
+
+.rank_ratio .ra_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 70px;
+}
+.rank_ratio .ra_title span {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'NanumSquare';
+    display: block;
+    margin-bottom: 30px;
+}
+.rank_ratio .ra_title h3 {
+    font-size: 46px;
+    font-weight: 800;
+    font-family: 'NanumSquare';
+}
+.rank_ratio .ra_title h3 strong {
+    font-weight: 800;
+    font-family: 'NanumSquare';
+    color: #ed3e21;
+}
+.ra_list {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+.ra_list .top_label {
+    display: flex;
+    position: relative;
+    padding-bottom: 20px;
+}
+.ra_list .top_label::after {
+    content: '';
+    display: block;
+    width: 102px; height: 67px;
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    background: no-repeat center ;
+    background-image: url(../images/main/coffee_bg.png);
+}
+.ra_list .top_label strong {
+    width: 50%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'NanumSquare';
+}
+.ra_list .top_label span {
+    color:#999999 ;
+    font-size: 16px;
+}
+.ra_list ul li {
+    display: flex;
+    position: relative;
+}
+.ra_list ul li + li {
+    margin-top: 14px;
+}
+.ra_list ul li .name {
+    position: absolute;
+    top: 50%; left: 50%;
+    z-index: 10;
+    display: block;
+    padding:0 20px ;
+    line-height: 30px;
+    background: #333333;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    transform: skew(-0.1deg) translate(-50% , -50%);
+    font-family: 'NanumSquare';
+}
+.ra_list ul li.more {
+    display: none;
+}
+.ra_list ul li.more.open {
+    display: flex;
+}
+.ra_list ul li div {
+    width: 50%;
+    background: #fff;
+    border-radius: 50px;
+    display: flex;
+}
+.ra_list ul li div span {
+    display: block;
+    width: 100%;
+    border-radius: 50px;
+    line-height: 30px;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'NanumSquare';
+    transform: skew(-0.1deg);
+}
+.ra_list ul li .local_bar {
+    justify-content: flex-end;
+}
+.ra_list ul li .local_bar span {
+    background: #ec644e;
+    text-align: left;
+    padding-left: 20px;
+}
+.ra_list ul li .local_bar {
+    justify-content: flex-end;
+}
+.ra_list ul li .out_bar span {
+    background: #6447b7;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.ra_list .more_btn {
+    display: flex;
+    align-items: center;
+    margin:40px 0 30px ;
+}
+.ra_list .more_btn span {
+    width: calc(50% - 74px);
+    height: 1px;
+    background: #dbdbdb;
+}
+.ra_list .more_btn button {
+    /* width: 110px; */
+    padding: 0  20px  0 26px ;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    line-height: 36px;
+    border: 1px solid #dbdbdb;
+    background: #fff;
+    border-radius: 50px;
+    margin: 0 19px;
+    box-shadow: 0px 4px 16.92px 1.08px rgba(51, 51, 51, 0.25);
+}
+.ra_list .more_btn button i {
+    display: block;
+    width: 14px; height: 8px;
+    background: no-repeat center;
+    background-image: url(../images/main/more_btn.png);
+    margin-left: 8px;
+}
+.ra_list .more_btn.open i {
+    transform: rotate(180deg);
+}
+.ra_list .ps {
+    color: #999999;
+    text-align:  center;
+}
+
+
+.event_wrap {
+    padding:30px  0;
+    max-width: 940px;
+    margin: 0 auto;
+
+}
+.event_wrap img {
+    width: 100%;
+}
+
+/* ================================ 모바일에서만 */
+.only_m {
+    display: none !important;
+}
+.only_w {
+    display: block !important;
+}
+
+.open_wrap,
+.mo_map_county  {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+/* 구간별 화면  */
+@media screen and (max-width: 1920px) {
+    .map_contact .map_img {
+        padding-right: 0;
+        margin-top: 10px;
+    }
+    .map_contact .map_bg {
+        margin: 0 ;
+    }
+
+    .map_contact {
+        padding: 40px 0 30px 60px;
+    }
+    .main .main_top {
+        padding-bottom: 24px;
+        padding-right: 5px;
+    }
+    .main .logo .logo1 {
+        width: 158px;
+        height: 40px;
+        background-image: url(../images/common/logo_01.png);
+    }
+    .main .logo .logo2 {
+        width: 110px;
+        height: 40px;
+        background-image: url(../images/common/logo_02.png);
+    }
+    .main .logo span {
+        width: 13px;
+        height: 15px;
+        background: no-repeat center / 13px auto;
+        background-image: url(../images/common/logo_and.png);
+    }
+    .map_contact .title_box h3 {
+        padding-bottom: 12px;
+        font-size: 22px;
+    }
+    .map_contact .title_box h2 {
+        font-size:48px;
+    }
+
+    .map_contact .foot_info_wrap {
+        padding-top:30px ;
+    }
+
+    .map_contact .foot_info {
+        margin-top: 0;
+    }
+    .only_1920up {
+        display: none !important;
+    }
+    .map_county .map_item {
+        padding: 105px 20px 20px 49px;
+    }
+    /* .map_contact .address span + span {
+        margin-left: 12px;
+    } */
+
+
+}
+
+@media screen and (max-width: 1800px) {
+    .map_contact {
+        padding: 60px 0 30px 15px;
+    }
+    .main .map_contact_wrap {
+        min-width: 800px;
+    }
+    .city_ranking .rank_top {
+        padding-right: 15px;
+        padding-left: 30px;
+    }
+
+    .sortwrap{
+        padding-left: 30px;
+    }
+    .tab_cont {
+        padding-left: 30px;
+        padding-right: 15px;
+    }
+    .rank_ratio {
+        padding: 74px 30px 50px;
+    }
+}
+
+@media screen and (max-width: 1700px) {
+    .rank_top .rank_tit {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .city_ranking .rank_top {
+        align-items: flex-start;
+    }
+    .rank_top .rank_tit h4 {
+        margin-bottom: 15px;
+    }
+    .rank_top a {
+        margin-top: 15px;
+    }
+
+}
+
+@media screen and (max-width: 1600px) {
+    .main .map_contact_wrap {
+        min-width: 750px;
+    }
+    .main .city_ranking {
+        width: calc(100% - 750px);
+    }
+    .map_county .map_item {
+        padding: 160px 20px 44px 20px;
+    }
+    .map_line {
+        width: 15px;
+    }
+    .map_contact {
+        width: 56%;
+    }
+    .map_county {
+        width: 44%;
+    }
+    .sortwrap{padding-left: 15px;}
+    .tab_cont .rank_list li .list_num {
+        width: 34px;
+    }
+    .tab_cont .rank_list li .ico {
+        margin-right: 10px;
+    }
+
+    .tab_cont {
+        padding-left: 15px;
+    }
+
+    .city_ranking .rank_top {
+        padding-left: 15px;
+    }
+}
+@media screen and (max-width: 1500px) {
+    .tab_cont .tab_box {
+        width: calc(50% - 7.5px);
+        margin-right: 15px;
+    }
+}
+@media screen and (max-width: 1450px) {
+    html.main_page {overflow:scroll}
+    body , #wrap {
+        width: 100%
+    }
+    .main {
+        min-width: 1450px;
+        width: ;
+        box-sizing: border-box;
+    }
+    .main .city_ranking {
+
+    }
+
+    /* .tab_cont .slick-list {
+    }
+    .tab_cont .tab_box {
+        padding: 0 20px;
+    }
+    .main .city_ranking {
+        width: calc(100% - 700px);
+    } */
+}
+
+@media screen and (max-width: 1024px) {
+    .only_m {
+        display: block !important;
+    }
+    .only_w {
+        display: none !important;
+    }
+
+    span.ico {
+        width: 38px; height: 38px;
+        border-radius: 8px;
+        margin-right: 15px;
+    }
+    span.ico.coffee {
+        background-size: 18px auto;
+        background-image: url(../images/ico/m_ico_coffee.png);
+    }
+    span.ico.korean {
+        background-size: 22px auto;
+        background-image: url(../images/ico/m_ico_korean.png);
+    }
+    span.ico.ham {
+        background-size: 18px auto;
+        background-image: url(../images/ico/m_ico_ham.png);
+    }
+    span.ico.japan {
+        background-size:23px auto;
+        background-image: url(../images/ico/m_ico_Japanese.png);
+    }
+    span.ico.bakery {
+        background-size: 15px auto;
+        background-image: url(../images/ico/m_ico_bakery.png);
+    }
+    span.ico.etc {
+        background-size:14px auto;
+        background-image: url(../images/ico/m_ico_etc.png);
+    }
+    span.ico.market {
+        background-size:22px auto;
+        background-image: url(../images/ico/m_ico_market.png);
+    }
+
+
+    .main .logo .logo1  {
+        width: 95px; height: 24px;
+        background-size: 95px auto;
+        background-image: url(../images/common/logo_01.png);
+    }
+    .main .logo .logo2  {
+        width: 65px; height: 24px;
+        background-size: 65px auto;
+        background-image: url(../images/common/logo_02.png);
+    }
+    .main .logo span {
+        width:8px; height: 9px;
+        background: no-repeat center / 8px auto;
+        background-image: url(../images/common/logo_and.png);
+        margin: 0 4px;
+
+    }
+
+
+
+    html.main_page {
+        overflow-y:auto ;
+        overflow-x: hidden;
+    }
+
+    #wrap {
+        overflow: hidden;
+    }
+
+    .main {
+        min-width: inherit;
+        width:100% ;
+        flex-direction: column;
+        padding-bottom: 76px;
+    }
+    .main .map_contact_wrap {
+        display: flex;
+        width: 100%;
+        min-width: inherit;
+        flex: 0 0 auto;
+        max-height: inherit;
+        position: inherit !important;
+    }
+    .main .city_ranking {
+        width: 100%;
+    }
+
+
+    .map_county {
+        display: none;
+    }
+    .map_contact {
+
+
+    }
+    .map_contact .main_top {
+        padding: 10px 15px;
+        border-bottom: 1px solid #e8ad32 ;
+        background:#fbbc39 ;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .main .logo {
+        padding-bottom: 0;
+    }
+    .main .logo a {
+        width:175.5px;
+        height:24px;
+        background: no-repeat center / 175.5px auto;
+        background-image: url(../images/common/m_logo.png);
+    }
+    .main_top .btn_box {
+        display: flex !important;
+        margin: 0;
+
+    }
+    .main_top .btn_box a {
+        padding: 0 8px;
+        height: 25px;
+        border-radius: 4px ;
+        color: #fbbc39;
+        font-weight: 500;
+        align-items: center;
+        justify-content: center;
+        font-size:10px;
+        display: flex;
+        background:#3e664b  no-repeat center ;
+    }
+    .main_top .btn_box a + a {
+        margin-left:6px ;
+    }
+    .main_top .btn_box a i {
+        display: block;
+        background: no-repeat center;
+        margin-right: 5px;
+    }
+
+    .main_top .btn_box .wish_btn i  {
+        width: 10px; height: 12px;
+        background-size: 10px;
+        background-image: url(../images/main/heart_btn.png);
+    }
+    .main_top .btn_box .shere_btn i {
+        width: 10px; height: 10px;
+        background-size: 10px;
+        background-image: url(../images/main/shere_btn.png);
+    }
+
+
+
+    .m_main_visual {
+        padding: 40px 20px 30px ;
+        height: 100%;
+        min-height: 680px;
+        display: flex;
+        flex-direction: column;
+        background: no-repeat center / cover;
+    }
+
+    .gangwon .m_main_visual {
+        background-image: url(../images/main/main_bg_m.png)
+    }
+    .seoul .m_main_visual {
+        background-image: url(../images/main/m_main_visual_seoul.png)
+    }
+    .gyeonggi .m_main_visual {
+        background-image: url(../images/main/m_main_visual_gyeonggi.png)
+    }
+    .incheon .m_main_visual {
+        background-image: url(../images/main/m_main_visual_incheon.png)
+    }
+    .chungnam .m_main_visual {
+        background-image: url(../images/main/m_main_visual_chungnam.png)
+    }
+    .chungbuk .m_main_visual {
+        background-image: url(../images/main/m_main_visual_chungbuk.png)
+    }
+    .daejeon .m_main_visual {
+        background-image: url(../images/main/m_main_visual_daejeon.png)
+    }
+    .sejong .m_main_visual {
+        background-image: url(../images/main/m_main_visual_sejong.png)
+    }
+    .daegu .m_main_visual {
+        background-image: url(../images/main/m_main_visual_daegu.png)
+    }
+    .gwangju .m_main_visual {
+        background-image: url(../images/main/m_main_visual_gwangju.png)
+    }
+    .jeonnam .m_main_visual {
+        background-image: url(../images/main/m_main_visual_jeonnam.png)
+    }
+    .jeonbuk .m_main_visual {
+        background-image: url(../images/main/m_main_visual_jeonbuk.png)
+    }
+    .gyeongbuk .m_main_visual {
+        background-image: url(../images/main/m_main_visual_gyeongbuk.png)
+    }
+    .gyeongnam .m_main_visual {
+        background-image: url(../images/main/m_main_visual_gyeongnam.png)
+    }
+    .busan .m_main_visual {
+        background-image: url(../images/main/m_main_visual_busan.png)
+    }
+    .ulsan .m_main_visual {
+        background-image: url(../images/main/m_main_visual_ulsan.png)
+    }
+    .Jeju .m_main_visual {
+        background-image: url(../images/main/m_main_visual_Jeju.png)
+    }
+
+
+
+    .map_contact .foot_info_wrap {
+        display: none !important;
+    }
+
+
+    .map_contact .map_img {
+        display: none;
+    }
+    .map_contact {
+        background: transparent;
+        width: 100%;
+        /* height: calc(var(--vh, 1vh) * 100 - 45px); */
+        /* height: calc(100vh - 45px); */
+        padding: 0;
+        min-height: inherit;
+        display: flex;
+        flex-direction: column;
+        z-index: 10;
+    }
+
+    .map_contact .title_box  {
+        padding-left: 10px ;
+    }
+    .map_contact .title_box h3 {
+        font-size: 16px;
+        padding-bottom:15px;
+    }
+    .map_contact .title_box h2 {
+        font-size:34px;
+    }
+    .map_contact .rank_txt {
+        margin-top: auto;
+        color: #fff;
+
+    }
+    .map_contact .rank_txt strong  {
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: 'NanumSquare';
+        transform: skew(-0.1deg);
+        margin-bottom: 15px;
+
+    }
+    .map_contact .rank_txt span {
+        font-size:10px ;
+        font-weight: 300;
+        opacity: 0.6;
+        line-height: 1.4;
+    }
+    .mo_map_county {
+        display: block;
+        position: fixed;
+        bottom: 0; left: 0;
+        width: 100%;
+        z-index: 99;
+        background: url(../images/common/map_sel_bg.png) no-repeat center top / cover;
+        padding: 22px 20px;
+    }
+    .mo_map_county > span {
+        font-size: 13px;
+        color: #757575;
+        font-family: 'NanumSquare';
+        transform: skew(-0.1deg);
+    }
+    .mo_map_county .sel_bot {
+        display: flex;
+        margin-top: 10px;
+    }
+    .mo_map_county .sel_bot .search_btn_click,
+    .mo_map_county .sel_bot .search_btn {
+        display: flex;
+        justify-content: center;
+        border-bottom: 2px solid #252525;
+        padding-bottom:6px ;
+
+    }
+    .mo_map_county .sel_bot .search_btn_click {
+        display: none;
+    }
+    .mo_map_county .sel_bot .search_btn_click i ,
+    .mo_map_county .sel_bot .search_btn i {
+        display: block;
+        width: 21px;height: 21px;
+        background: no-repeat center / 21px auto;
+        background-image: url(../images/main/map_sel_search.png);
+        margin-right: 5px;
+    }
+    .mo_map_county .sel_bot .search_btn p {
+        font-size: 19px;
+        color: #dddddd;
+        font-weight: 700;
+        margin-right: 5px;
+        font-family: 'NanumSquare';
+    }
+    .mo_map_county .sel_bot .search_btn_click.on {
+        font-size: 19px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        line-height: 1.2;
+    }
+    .mo_map_county .sel_bot .search_btn_click strong {
+        display: block;
+        line-height: 1;
+    }
+    .mo_map_county .sel_bot h4 {
+        font-size: 19px;
+        font-weight: 700;
+        font-family: 'NanumSquare';
+        margin-left:6px ;
+        line-height: 1.3;
+        margin-top: 2px;
+    }
+
+
+    .open_wrap {
+        display: none;
+        width: 100%; height: 100%;
+    }
+    .open_cont {
+        position: fixed;
+        top: 0 ; left: 0;
+        width: 100%; height: auto;
+        background: #fbbc39 ;
+        padding: 0 24px 25px ;
+        z-index: 1000;
+    }
+    .open_cont .open_item{
+        max-height: calc(var(--vh, 1vh) * 100 - 85px);
+        /* max-height: calc(100vh - 100px); */
+        height: 100%;
+        overflow: auto;
+        position: relative;
+    }
+    .open_wrap .close {
+        display: flex;
+        width: 45px ; height: 45px;
+        background: no-repeat center /  15px auto;
+        background-image: url(../images/common/close.png);
+        position: absolute;
+        top: 0 ; right: 0;
+    }
+    .open_wrap .top {
+        padding-top: 45px;
+    }
+    .open_wrap .bot {
+        padding-top: 25px;
+    }
+
+    .open_wrap .detail{padding-top: 25px;}
+    .open_wrap div strong {
+        font-size: 21px;
+        line-height: 1.5;
+        display: block;
+        margin-bottom: 20px;
+    }
+    .open_wrap div ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .open_wrap div ul li {
+        width: calc(25% - 7.5px);
+        margin-right: 10px;
+        border: 1px solid #db9911 ;
+        display: flex ;
+        align-items: center;
+        justify-content: center;
+    }
+    .open_wrap div ul li.on{
+        border-color: #252525;
+    }
+    .open_wrap div ul li:nth-of-type(4n){
+        margin-right: 0;
+    }
+    .open_wrap div ul li:nth-child(n+5) {
+        margin-top: 10px;
+    }
+    .open_wrap div ul li button {
+        display: block;
+        width: 100%;
+        font-size:18px ;
+        color:#b27a06 ;
+        line-height: 1.2;
+        min-height: 35px;
+        /* word-break: break-all; */
+    }
+    .open_wrap div ul li.on button {
+        color: #252525;
+
+    }
+    .open_wrap .top ul li {
+        border-radius: 18px;
+    }
+    .open_wrap .bot ul li {
+        border-radius: 3px;
+    }
+
+    .open_wrap .ch_btn {
+        width: 100%;
+        background: #252525 ;
+        color: #fff;
+        display: block;
+        line-height: 40px;
+        font-size: 19px;
+        font-weight: 500;
+        margin-top: 20px;
+        /* position: fixed;
+        bottom: 0; left: 0; */
+    }
+    .open_wrap .dim {
+        position: fixed;
+        z-index: 1;
+        width: 100%; height: 100%;
+        display: block;
+        top: 0; left: 0;
+        background: rgba(0,0,0,0.3);
+
+    }
+
+    .city_ranking .rank_top a {
+        position: fixed;
+        bottom: 100px; right: 0;
+        background: #fbbc39;
+        z-index: 10;
+        display: flex;
+        flex-direction: row-reverse;
+        border-bottom: none;
+        padding:20px 7px 20px 14px ;
+        border-radius: 50px 0 0 50px;
+        margin: 0;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.1;
+    }
+
+    .city_ranking .rank_top a i {
+        display: block;
+        width: 24px; height: 32px;
+        background: no-repeat center / 24px auto;
+        background-image: url(../images/main/pin_w.png);
+        margin-right: 5px;
+        font-size: 0; color: transparent;
+    }
+
+
+    /* 맛집랭킹 슬라이더 */
+    .tab_cont .slick-list {
+        padding: 0 40px 0 0 !important;
+        margin: 0 -5px;
+        overflow: visible;
+        position: relative;
+    }
+    .tab_cont .slick-list::after {
+        content: '';
+        width: 100%; height: 100%;
+        background: #3e664b;
+        top: 0; left: -100%;
+        display: block;
+        position: absolute;
+
+    }
+    .tab_cont .tab_box.out ,
+    .tab_cont .tab_box {
+        margin: 0 5px;
+    }
+    .tab_cont .slick-active {
+    }
+
+    .main .city_ranking {
+
+        overflow: hidden;
+    }
+    .main .city_ranking .rank_item {
+        padding: 35px 0 0;
+    }
+    .city_ranking .rank_top {
+        padding-left: 20px;
+    }
+    .rank_top .rank_tit h4 {
+        font-size: 26px;
+        margin-right: 0;
+    }
+    .rank_top .rank_tit > span {
+        font-size: 13px;
+
+    }
+    .city_ranking .slick-dots {
+        width:100%;
+        margin:0 auto 20px ;
+        display: flex;
+    }
+    .city_ranking .slick-dots li a  {
+        font-size: 18px;
+        font-weight: 800;
+        font-family: 'NanumSquare';
+        transform: skew(-0.1deg);
+        color: #dddddd;
+    }
+    .city_ranking .slick-dots li:first-child {
+        padding-right: 15px;
+        margin-right: 15px;
+        position: relative;
+    }
+    .city_ranking .slick-dots li:first-child::after {
+        content: '';
+        display: block;
+        width: 4px  ; height: 4px;
+        background:#dddddd ;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%; right: -2px;
+        transform: translateY(-50%);
+    }
+    .city_ranking .slick-dots li.slick-active a{
+        color: #fbbc39
+    }
+
+
+
+    .tab_cont {
+        padding: 20px 20px 40px;
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+    .tab_cont .rank_list li:hover {
+        box-shadow:none;
+    }
+    .city_ranking .tab_box .label {
+        display: none;
+    }
+    .tab_cont .rank_list li {
+        border-radius: 8px;
+        padding: 15px 6px;
+        height: 75px;
+    }
+    .tab_cont .rank_list li .list_num {
+        width: 38px;
+        height: 38px;
+        margin-right: 6px;
+        font-size: 12px;
+    }
+    .tab_cont .rank_list li .ico {
+        display: block;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        margin-right:15px;
+    }
+    .tab_cont .location_area p.market_name {
+        font-size: 15px;
+        line-height: 1.3;
+    }
+    .tab_cont .location_area a p.market_name {
+        font-size: 17px;
+        padding-bottom: 2px;
+    }
+
+    .tab_cont .location_area .add {
+        font-size: 12px;
+    }
+    .rank_ratio {display: none;}
+    .event_wrap {
+        padding: 0;
+
+    }
+    .event_wrap * {
+        line-height: 95px !important;
+        border-radius: 0 !important;
+    }
+
+    .footer {
+        background:#444444 ;
+    }
+    .footer .inner {
+        width: calc(100% - 30px);
+        margin: 0 auto;
+        padding:25px 0 40px ;
+    }
+    .footer .inner * {
+        color: #fff;
+    }
+    .footer .inner p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    .footer .inner .address span {
+        display: block;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+
+
+
+
+
+
+
+
+
+}
+@media screen and (max-width: 370px) {
+    .tab_cont .slick-list {
+        padding: 0 0 0 0 !important;
+        margin: 0 -5px;
+        /* overflow: visible; */
+    }
+    .mo_map_county .sel_bot .search_btn_click strong {
+        font-size: 17px;
+        line-height: 1.2;
+    }
+    .mo_map_county .sel_bot h4 {
+        font-size: 17px;
+        line-height: 1.2;
+
+    }
+}
+@media screen and (max-width: 590px) {
+    .open_wrap div ul li button {
+        font-size:16px;
+    }
+}
+
+@media screen and (max-width: 500px)  {
+    .open_wrap div ul li button {
+        word-break: break-all;
+        font-size: 14px;
+        min-height: 30px;
+        padding: 0 5px;
+    }
+}
+@media screen and (max-width: 390px){
+    .mo_map_county .sel_bot .search_btn_click strong {
+        font-size: 16px;
+    }
+    .mo_map_county .sel_bot h4 {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+}
+@media screen and (max-width: 340px) {
+    .mo_map_county .sel_bot .search_btn_click strong {
+        font-size: 15px;
+    }
+    .mo_map_county .sel_bot h4 {
+        font-size: 15px;
+    }
+    .mo_map_county {
+        padding: 15px 20px;
+    }
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>광주 지역 지도 표시</title>
+</head>
+
+<body th:fragment="content">
+<div id="map" style="width:100%;height:700px;"></div>
+<script src="/js/sidebar.js"></script>
+
+<script th:inline="javascript">
+  var locations = /*[[${list}]]*/;
+
+
+  var gu = [[${guName}]];
+  var dong = [[${dongName}]];
+  var centerLat = parseFloat([[${centerLat}]]);
+  var centerLng = parseFloat([[${centerLng}]]);
+  var sigunguCode = /*[[${sigunguCode}]]*/ || 0;
+
+
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: centerLat, lng: centerLng },
+    zoom: 13,
+    draggable: false,
+    disableDefaultUI: true,
+    styles: [
+      {
+        "featureType": "all",
+        "elementType": "labels",
+        "stylers": [{ "visibility": "off" }] // 라벨 비활성화
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [{ "visibility": "on" }, { "color": "#FFA500" }] // 도로는 표시
+      },
+      {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [{ "visibility": "on" }, { "color": "#FFA500" }] // 지형은 표시
+      },
+      {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [{ "visibility": "off" }] // POI(관광지 등) 비활성화
+      },
+      {
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [{ "visibility": "off" }] // 대중교통 정보 비활성화
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [{ "visibility": "on" }, { "color": "#FFA500" }] // 물은 표시
+      },
+      {
+        "featureType": "road.arterial",
+        "elementType": "labels.icon",
+        "stylers": [{ "visibility": "off" }] // 주요 도로의 아이콘 비활성화
+      },
+      {
+        "featureType": "road.local",
+        "elementType": "labels",
+        "stylers": [{ "visibility": "off" }] // 로컬 도로의 라벨 비활성화
+      },
+      {
+        "featureType": "poi.business",
+        "elementType": "labels",
+        "stylers": [{ "visibility": "off" }] // 비즈니스 POI(예: 식당, 가게 등) 라벨 비활성화
+      },
+      {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [{ "visibility": "off" }] // 행정 구역 경계선 비활성화
+      }
+    ]
+  });
+
+
+
+
+
+
+
+
+  // GeoJSON 폴리곤 그리기
+    $.ajax({
+      url: 'geojson/' + gu + '/' + dong + '.geojson',
+      type: 'GET',
+      dataType: 'json',
+      success: function (geojson) {
+        var polygons = [];
+        var bounds = new google.maps.LatLngBounds();
+
+        geojson.features.forEach(function (feature) {
+          var coords = feature.geometry.coordinates[0][0].map(function (coord) {
+            return { lat: coord[1], lng: coord[0] };
+          });
+
+          var polygon = new google.maps.Polygon({
+            paths: coords,
+            strokeColor: '#004c80',
+            strokeOpacity: 0.1,
+            strokeWeight: 3,
+            fillColor: '#000000',
+            fillOpacity: 0.2,
+            map: map
+          });
+
+          polygons.push(polygon);
+          coords.forEach(function (coord) {
+            bounds.extend(coord);
+          });
+        });
+
+        map.fitBounds(bounds);
+
+        polygons.forEach(function (polygon) {
+          google.maps.event.addListener(polygon, 'mouseover', function () {
+            this.setOptions({fillOpacity: 1, fillColor: '#464646'});
+          });
+
+          google.maps.event.addListener(polygon, 'mouseout', function () {
+            this.setOptions({fillOpacity: 1, fillColor: '#FFFCED'});
+          });
+          // google.maps.event.addListener(polygon, 'click', function () {
+          //
+          // });
+        });
+      },
+      error: function (xhr, status, error) {
+        console.error('GeoJSON 파일을 불러오는 데 실패했습니다.', error);
+      }
+    });
+
+</script>
+
+
+</body>
+</html>

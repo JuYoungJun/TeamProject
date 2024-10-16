@@ -1,0 +1,107 @@
+
+<div th:fragment="footer">
+    <link rel="stylesheet" th:href="@{css/style.css}" media="screen and (min-width:800px)">
+    <footer>
+        <div class="w1000">
+
+
+            <p class="logo"><a href="main">  <img th:src="@{images/logo.png}" width="188" alt="" ></a></p>
+            <div class="inner">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0);">푸드</a>
+                        <ul>
+                            <li>- <a href="/food" target="_blank">광주푸드랭킹</a></li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                       <!-- <img src="/images/icon/map.png" width="18px"/>-->
+                        <a href="javascript:void(0);">지도</a>
+                        <ul>
+                            <li>- <a href="map" target="_blank">광주랜덤여행</a></li>
+                            <li>- <a href="https://travelwest.jp/overseas/list/" target="_blank">지도로보기</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <!--<img src="/images/icon/reserve.png" width="18px"/>-->
+                        <a href="javascript:void(0);">예약</a>
+                        <ul>
+                            <li>
+                                <!--<img src="/images/icon/hotel.png" width="18px"/>-->
+                                <a href="https://www.hotelscombined.co.kr/" target="_blank">
+                                    호텔예약
+                                </a>
+                            </li>
+                            <li>
+                                <!--<img src="/images/icon/train.png" width="18px"/>-->
+                                <a href="https://www.letskorail.com/ebizprd/EbizPrdTicketpr21100W_pr21110.do" target="_blank">
+                                    철도
+                                </a>
+                            </li>
+                            <li class="icon">
+                                <!--<img src="/images/icon/bihanggi.png" width="18px"/>-->
+                                <a href="https://flight.naver.com/" target="_blank">
+                                    비행기
+                                </a>
+                            </li>
+                            <li class="icon">
+                                <!--<img src="/images/icon/bus.png" width="18px"/>-->
+                                <a href="https://www.kobus.co.kr/main.do" target="_blank">
+                                    버스
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="bdr">
+                    <li>
+                        <!-- 로그인 상태에 따라 로그인/로그아웃 링크 표시 -->
+                        <span th:if="${session.authenticatedUser == null}">
+            <a href="/login">로그인</a>
+        </span>
+                        <span th:if="${session.authenticatedUser != null}">
+            <a href="/logout">로그아웃</a>
+        </span>
+
+                        <!-- 로그인 상태일 때만 마이페이지 메뉴가 보이도록 설정 -->
+                        <ul th:if="${session.authenticatedUser != null}">
+                            <li>- <a href="/mypage">마이페이지</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!--<ul>
+                    <p>고객 센터 ></p>
+                    <li><a href="https://travel-west.net/travelinfo/">대표 이메일 - codeljs@naver.com</a></li>
+                    <li><a href="https://travelwest.jp/company/">문의 전화 - 010-4529-9600</a></li>
+                </ul>-->
+
+                <ul>
+                    <p>프로젝트 정보</p>
+                    <li><a href="#">팀 이름 - Yohaeng 프로젝트 팀</a></li>
+                    <li><a href="#">팀장 - 주영준 / 팀원 - 김은호, 김희재, 주의진</a></li>
+                    <li><a href="#">개발 스택 - Spring Boot, MyBatis, Thymeleaf</a></li>
+                </ul>
+
+            </div>
+            <div class="f_box clearfix">
+                <div class="rightBox">
+                    <p class="qsmd">Follow us</p>
+                    <ul class="sns">
+                        <li><a href="#" target="_blank">  <img src="/images/twitter.png" width="15" alt="Twitter"/> </a></li>
+                        <li><a href="#" target="_blank">  <img src="/images/facebook.png" width="15" alt="Facebook"/> </a></li>
+                        <li><a href="#" target="_blank">  <img src="/images/instargram.png" width="15" alt="Instagram"/></a></li>
+                    </ul>
+                </div>
+                <p class="copyright qsmd">&copy; 광주광역시</p>
+                <p id="pagetop"><a href="#"><picture><source   type="image/webp" data-srcset="https://travelwest.jp/cms/wp-content/themes/travelwest-theme/assets/img/common/pagetop@2x.png.webp"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABAAQMAAACQp+OdAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAA5JREFUGBljGAWjgAIAAAJAAAHwmIKcAAAAAElFTkSuQmCC" width="32" alt="トップへ戻る" data-eio="p" data-src="https://travelwest.jp/cms/wp-content/themes/travelwest-theme/assets/img/common/pagetop@2x.png" decoding="async" class="lazyload" data-eio-rwidth="64" data-eio-rheight="64"><noscript><img src="https://travelwest.jp/cms/wp-content/themes/travelwest-theme/assets/img/common/pagetop@2x.png" width="32" alt="トップへ戻る" data-eio="l"></noscript></a></p>
+            </div>
+        </div>
+    </footer>
+</div>

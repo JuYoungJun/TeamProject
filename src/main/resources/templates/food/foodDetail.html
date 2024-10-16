@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음식점 상세 정보</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* 전체 페이지의 배경색 및 기본 폰트 설정 */
+        body {
+            background-color: #cccccc; /* 페이지의 배경색을 회색으로 설정 */
+            font-family: 'Arial', sans-serif; /* 폰트 패밀리를 Arial로 지정 */
+        }
+
+        /* 컨테이너의 상단 마진 설정 */
+        .container {
+            margin-top: 75px; /* 컨테이너 위쪽 여백 */
+        }
+
+        /* 카드 컴포넌트 스타일 */
+        .card {
+            border: none; /* 카드 테두리 제거 */
+            border-radius: 15px; /* 카드의 모서리를 둥글게 설정 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* 카드의 그림자 효과 */
+            overflow: hidden; /* 내용이 카드 영역을 벗어날 때 숨김 */
+        }
+
+        /* 카드 헤더 스타일 */
+        .card-header {
+            background-color: #FFDA98; /* 카드 헤더의 배경색 */
+            color: black; /* 텍스트 색상 설정 */
+            text-align: center; /* 텍스트를 중앙 정렬 */
+            padding: 20px; /* 패딩 설정 */
+            border-top-left-radius: 15px; /* 왼쪽 상단 모서리 둥글게 */
+            border-top-right-radius: 15px; /* 오른쪽 상단 모서리 둥글게 */
+            font-size: 24px; /* 글자 크기를 자연스럽게 키움 */
+            font-weight: bold; /* 글자를 굵게 표시 */
+        }
+
+        /* 카드 바디 영역 스타일 */
+        .card-body {
+            padding: 40px; /* 카드 바디의 패딩 */
+            background-color: #ffffff; /* 카드 바디의 배경색 */
+        }
+
+        /* 테이블 내 셀의 스타일 */
+        .table th, .table td {
+            vertical-align: middle; /* 셀의 텍스트를 수직으로 가운데 정렬 */
+            border-top: none; /* 테이블 상단 테두리 제거 */
+        }
+
+        /* 테이블 헤더 셀 스타일 */
+        .table th {
+            width: 30%; /* 헤더 셀의 너비 설정 */
+            font-weight: bold; /* 텍스트를 굵게 표시 */
+            background-color: #FFDA98; /* 테이블 헤더의 배경색 */
+            text-align: center; /* 헤더 텍스트 중앙 정렬 */
+        }
+
+        /* 테이블 데이터 셀 스타일 */
+        .table td {
+            background-color: #ffffff; /* 테이블 데이터 셀의 배경색 */
+            text-align: center; /* 데이터 셀의 텍스트 중앙 정렬 */
+        }
+
+        /* 버튼 스타일 */
+        .btn-secondary {
+            background: #FFDA98;  /* 카드 헤더와 동일한 색상으로 버튼 배경 설정 */
+            border: none; /* 버튼 테두리 제거 */
+            transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 설정 */
+            border-radius: 30px; /* 버튼의 모서리를 둥글게 설정 */
+            padding: 10px 20px; /* 버튼 내부 패딩 설정 */
+            color: black; /* 버튼 텍스트 색상 설정 */
+        }
+
+        /* 버튼 호버 시 스타일 */
+        .btn-secondary:hover {
+            background: #FFDA98;  /* 호버 시 버튼 배경색을 동일하게 유지 */
+            color: white; /* 호버 시 텍스트 색상을 흰색으로 변경 */
+        }
+
+        /* 지도 컨테이너 스타일 */
+        .map-container {
+            border-radius: 15px; /* 지도 컨테이너의 모서리를 둥글게 설정 */
+            overflow: hidden; /* 내용이 영역을 벗어날 때 숨김 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+            margin-top: 20px; /* 위쪽 마진 설정 */
+        }
+
+        /* 이미지 컨테이너 스타일 */
+        .img-container img {
+            max-height: 300px; /* 이미지의 최대 높이 설정 */
+            border-radius: 10px; /* 이미지의 모서리를 둥글게 설정 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 이미지에 그림자 효과 추가 */
+            margin-bottom: 20px; /* 아래쪽 마진 설정 */
+        }
+
+        /* 음식점 정보 박스 스타일 */
+        .info-box {
+            background-color: #f8f9fa; /* 박스의 배경색 설정 */
+            border-radius: 15px; /* 모서리를 둥글게 설정 */
+            padding: 15px; /* 내부 패딩 설정 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05); /* 그림자 효과 추가 */
+            margin-bottom: 30px; /* 아래쪽 마진 설정 */
+        }
+
+        /* 음식점 정보 헤더 스타일 */
+        .info-box h4 {
+            color: #343a40; /* 텍스트 색상 설정 */
+        }
+    </style>
+</head>
+<!-- 헤더 삽입 -->
+<th:block th:replace="~{header :: header}"></th:block>
+<body>
+<div id="content" class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 th:text="${food.title}" style="font-weight: bold;">음식점 제목</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- 이미지 영역 -->
+                <div class="col-md-5 text-center img-container">
+                    <img th:src="${food.image}" alt="음식점 이미지" class="img-fluid"/>
+                </div>
+                <!-- 상세 정보 테이블 -->
+                <div class="col-md-7">
+                    <div class="info-box">
+                        <h4>음식점 정보</h4>
+                        <table class="table table-striped table-bordered"> <!-- Bootstrap 스타일 추가 -->
+                            <tbody>
+                            <tr>
+                                <th>제목</th>
+                                <td th:text="${food.title}">음식점 이름</td>
+                            </tr>
+                            <tr>
+                                <th>구</th>
+                                <td class="sigungu-code" th:text="${food.sigunguCode}">구 정보</td>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <td th:text="${food.addr1} + ' ' + ${food.addr2}">주소 정보</td>
+                            </tr>
+                            <tr>
+                                <th>전화번호</th>
+                                <td th:text="${food.tel}">전화번호 정보</td>
+                            </tr>
+                            <tr>
+                                <th>카테고리</th>
+                                <td th:text="${food.cat1} + ' / ' + ${food.cat2}">카테고리 정보</td>
+                            </tr>
+                            <tr>
+                                <th>별점</th>
+                                <td th:text="${food.rating}">0.0</td>
+                            </tr>
+                            <tr>
+                                <th>리뷰</th>
+                                <td th:text="${food.reviewCnt}">0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Maps 표시 영역 -->
+            <div class="map-container">
+                <div id="map" style="height: 400px; width: 100%;"></div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a th:href="@{/foodlist}" class="btn btn-secondary btn-lg">목록으로 돌아가기</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Google Maps JavaScript API Script -->
+<script async defer th:src="@{'https://maps.googleapis.com/maps/api/js?key=' + ${googleMapsApiKey}}"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function () {
+        // 시군구 코드 매핑
+        const sigunguMapping = {
+            '1': '광산구',
+            '2': '남구',
+            '3': '동구',
+            '4': '북구',
+            '5': '서구'
+        };
+
+        // sigunguCode를 구 이름으로 변환하여 표시
+        $('.sigungu-code').each(function () {
+            const code = $(this).text();  // 현재의 sigunguCode 값 가져오기
+            $(this).text(sigunguMapping[code] || '알 수 없음');  // 구 이름으로 변환
+        });
+    });
+
+    // 음식점의 위치 좌표를 Thymeleaf에서 받아와서 JavaScript 변수로 저장
+    const mapY = /*[[${food.mapY}]]*/ 0;  // 위도 (lat)
+    const mapX = /*[[${food.mapX}]]*/ 0;  // 경도 (lng)
+
+    // 페이지가 로드되면 Google Maps API 초기화
+    function initMap() {
+        // 음식점의 위치 좌표
+        const foodLocation = { lat: parseFloat(mapY), lng: parseFloat(mapX) };
+
+        // 지도 생성
+        const map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 18,  // 지도의 확대 레벨
+            center: foodLocation  // 음식점의 위치를 지도의 중심으로 설정
+        });
+
+        // 마커 추가
+        const marker = new google.maps.Marker({
+            position: foodLocation,
+            map: map,
+            title: /*[[${food.title}]]*/ '음식점 이름'
+        });
+    }
+
+    // Google Maps API가 로드되면 initMap 함수 호출
+    window.onload = function() {
+        initMap();
+    };
+    /*]]>*/
+</script>
+<th:block th:replace="~{footer :: footer}"></th:block>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>광주 구 지도 표시</title>
+</head>
+
+<body th:fragment="content">
+<div id="map" style="width:100%;height:700px;"></div>
+
+<!-- 여행지 개수를 입력받는 필드 추가 -->
+<div class="buttons">
+    <label for="locationCount">여행지 개수:</label>
+    <input type="number" id="locationCount" value="3" min="1" max="10">
+    <button id="button1">랜덤 여행 출발</button>
+</div>
+
+<script src="/js/sidebar.js"></script>
+<script src="/js/button.js"></script>
+<script src="/js/polyLine.js"></script>
+<script th:inline="javascript">
+    var lists = [[${list}]]; // 관광지 리스트
+    var guName = [[${guName}]]; // 구 이름
+    var centerLat = parseFloat([[${centerLat}]]); // 중심 위도
+    var centerLng = parseFloat([[${centerLng}]]); // 중심 경도
+    var sigunguCode = [[${sigunguCode}]]; // 시군구 코드
+    var zoomLevel = (guName === "gwangsangu") ? 12 : 13; // 줌 레벨 설정
+
+    // 구글 맵 초기화
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: centerLat, lng: centerLng },
+        zoom: zoomLevel,
+        scaleControl: true
+    });
+
+    var markers = []; // 마커를 저장할 배열
+    var polylines = [];
+
+
+    // 구별 폴리곤 그리기 (GeoJSON)
+    $.ajax({
+        url: 'geojson/' + guName + '.geojson',  // GeoJSON 파일 경로
+        type: 'GET',
+        dataType: 'json',
+        success: function(geojson) {
+            geojson.features.forEach(function(feature) {
+                var coords = feature.geometry.coordinates[0][0].map(function(coord) {
+                    return { lat: coord[1], lng: coord[0] };
+                });
+
+                // 폴리곤 생성
+                var polygon = new google.maps.Polygon({
+                    paths: coords,
+                    strokeColor: '#000000',
+                    strokeOpacity: 0.1,
+                    strokeWeight: 1,
+                    map: map
+                });
+
+                // 폴리곤 클릭 이벤트
+                google.maps.event.addListener(polygon, 'click', function() {
+                    var dongName = feature.properties.SIG_KOR_NM;
+
+
+                    loadDong(sigunguCode, centerLat, centerLng, guName, dongName);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/' + guName + '/dongs',
+                        data: {
+                            dongName: dongName,
+                            dongLat: dongLat,
+                            dongLng: dongLng,
+                            sigunguCode: sigunguCode,
+                            guName: guName,
+                            centerLat: centerLat,
+                            centerLng: centerLng
+                        },
+                        success: function(response) {
+                            $('.map_content').html(response);
+                        },
+                        error: function(error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                });
+
+                // 마우스 오버 시 폴리곤 색상 변경
+                google.maps.event.addListener(polygon, 'mouseover', function() {
+                    polygon.setOptions({
+                        fillOpacity: 0.001
+                    });
+                });
+
+                // 마우스 아웃 시 폴리곤 원래 색상으로 복구
+                google.maps.event.addListener(polygon, 'mouseout', function() {
+                    polygon.setOptions({
+                        fillColor: '#00a0e9',
+                        fillOpacity: 0.1
+                    });
+                });
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('GeoJSON 파일을 로드하는 중 오류 발생:', error);
+        }
+    });
+</script>
+
+</body>
+</html>

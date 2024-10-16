@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yohaeng.gwangju.mapper.AddressMapper">
+
+    <!-- 주소 저장 -->
+    <insert id="save" parameterType="com.yohaeng.gwangju.model.Address">
+        INSERT INTO addresses (user_id, address_name, address_line1, address_line2, zip_code, created_at)
+        VALUES (#{userId}, #{addressName}, #{addressLine1}, #{addressLine2}, #{zipCode}, NOW());
+    </insert>
+
+    <!-- 사용자 주소 조회 -->
+<!--    <select id="findByUserId" resultType="com.yohaeng.gwangju.model.Address">
+        SELECT * FROM testaddresses WHERE user_id = #{userId};
+    </select>-->
+
+    <select id="findByUserId" resultType="com.yohaeng.gwangju.model.Address">
+        SELECT id, user_id AS userId, address_name AS addressName, address_line1 AS addressLine1, address_line2 AS addressLine2, zip_code AS zipCode, created_at, updated_at
+        FROM addresses
+        WHERE user_id = #{userId};
+    </select>
+
+
+    <!-- 주소 업데이트 -->
+    <update id="update" parameterType="com.yohaeng.gwangju.model.Address">
+        UPDATE addresses
+        SET address_name = #{addressName}, address_line1 = #{addressLine1}, address_line2 = #{addressLine2},
+        zip_code = #{zipCode}, updated_at = NOW()
+        WHERE id = #{id};
+    </update>
+
+    <!-- 주소 삭제 -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM addresses WHERE id = #{id};
+    </delete>
+
+</mapper>

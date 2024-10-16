@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" lang="ko">
+
+<!-- Mirrored from korean.visitkorea.or.kr/localfood/main.do by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 02:34:28 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>광주 맛집 랭킹</title>
+
+
+    <meta property="og:url" content="main.html"/>
+    <!-- css -->
+
+    <link rel="stylesheet" th:href="@{css/food/slick.css}">
+    <link rel="stylesheet" th:href="@{css/food/sub.css}">
+    <link rel="stylesheet" th:href="@{css/food/reset.css}">
+    <link rel="stylesheet" th:href="@{css/food/main.css}">
+
+    <!-- js -->
+    <script>var contextPath = "/localfood";</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/stickybits.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <script th:src="@{js/sidebar.js}"></script>
+    <script th:src="@{js/food/food.js}"></script>
+
+    <title>온니 광주 맛집</title>
+
+    <script src="js/share.js%3bjsessionid%3dA582076962C00D56683D659F7C4D7EBC.instance2"></script>
+
+    <script th:src="@{'https://maps.googleapis.com/maps/api/js?key=' + ${googleMapsApiKey} + '&libraries=maps,marker&v=beta'}"></script>
+
+<style>
+    .tab_cont .location_area p.market_name {
+      font-size: 15px;
+      line-height: 1.3;
+      font-weight: bold;
+      text-decoration: underline;
+      white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+
+    /* InfoWindow에서 X 버튼을 숨기기 위한 스타일 */
+    .gm-style-iw {
+        display: none; /* X 버튼을 숨김 */
+    }
+
+@media screen and (max-width: 1024px) {
+    .city_ranking .rank_top a {
+        position: fixed;
+        bottom: 100px;
+        right: 0;
+        background: #fbbc39;
+        z-index: 10;
+        display: flex;
+        flex-direction: row-reverse;
+        border-bottom: none;
+        padding: 20px 7px 20px 14px;
+        border-radius: 50px 0 0 50px;
+        margin: 0;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.1;
+    }
+}
+
+    .rank_top a {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #fff;
+    margin-right: 28px;
+    color: #fff;
+}
+</style>
+
+    <style>
+        /* InfoWindow의 닫기 버튼 숨기기 */
+        .gm-style-iw button.gm-ui-hover-effect {
+            display: none !important;
+        }
+
+        .terra{
+            padding-top :40px;
+        }
+    </style>
+
+
+
+</head>
+<th:block th:replace="~{favicon :: head1}"></th:block>
+<body>
+<th:block th:replace="~{header :: header}"></th:block>
+
+
+    <section id="parent" class="main" style="background-color: orange">
+
+
+        <!-- 왼쪽 지도 선택  -->
+        <div class="map_contact_wrap" id="sticky" style="background-color: orange">
+
+            <!-- map_contact -->
+            <section class="map_contact">
+
+
+
+
+                    <div class="title_box">
+                        <h3>온니 광주</h3>
+                        <h2 class="terra">광주광역시</h2><h2> 맛집지도</h2>
+                    </div>
+
+                    <div class="map_img">
+
+
+                    </div>
+
+
+
+
+
+                <div class="map_content">
+                    <div class="container">
+                        <div th:replace="~{food/foodGwangju :: content}"></div>
+                    </div>
+
+                </div>
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <div class="dim"></div>
+
+        </div>
+        <!-- // mo_map_county //  -->
+
+
+
+
+
+        <input type="hidden" id="sigunguCode" value='' />
+        <input type="hidden" id="guName" value='' />
+        <input type="hidden" id="dongName" value='' />
+        <div class="city_ranking" style="background-color: #464646">
+            <div class="rank_item">
+
+                <div class="rank_top">
+                    <div class="rank_tit">
+                        <h4>맛집<span>랭킹10</span></h4>
+                        <span>광주 사람들과 여행자들이 즐겨찾는 식당들의 리뷰들을 모아 <br> 광주 전체의 평점과 리뷰순으로 정리해 드립니다!</span>
+                    </div>
+                    <a href="map4">지도로 <br class="only_m">보기 <i>+</i></a>
+                </div>
+                <!-- 0103 추가-->
+                <script>
+
+                    var cat1 = null;
+                    var sigunguCode = document.getElementById('sigunguCode').value;
+
+                </script>
+
+
+                <div class="sortwrap only_w">
+                    <ul>
+                        <li class="on" data-cate="all">
+                            <button onclick="loadFood( 'all1')">전체</button> <!--0103 추가 on클래스 추가시 화-->
+                        </li>
+                        <li class="res" data-cate="restaurant">
+                            <button onclick="loadFood('restaurant')">식당</button>
+                        </li>
+                        <li class="cafe" data-cate="cafe">
+                            <button onclick="loadFood('cafe')">카페</button>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+
+                <div class="tab_cont">
+
+
+                    <div class="tab_box on">
+                        <div class="rating">
+                            <strong class="label">별점 랭킹</strong>
+
+                            <ul class="rank_list">
+
+                                <li class="num_1st ranking_top" style="cursor:default;" th:each="list, iterStat : ${listRating}" >
+                                    <span class="list_num"><i></i>[[${iterStat.index + 1}]]위</span>
+                                    <span class="ico etc"></span>
+                                    <div class="location_area">
+                                        <p class="market_name" th:text="${list.title}">제목</p><i></i>
+                                        <p class="add" th:text="${list.addr1}">주소</p>
+                                        <span class="add" th:utext="'<b>별점:</b> ' + ${list.rating} + '  <b>리뷰수:</b> ' + ${list.reviewCnt}"></span>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab_box on">
+                        <div class="review">
+                            <strong class="label">리뷰수 랭킹</strong>
+
+                            <ul class="rank_list">
+
+                                <li class="num_1st ranking_top" style="cursor:default" th:each="list, iterStat : ${listReview}">
+                                    <span class="list_num"><i></i>[[${iterStat.index + 1}]]위</span>
+                                    <span class="ico etc"></span>
+                                    <div class="location_area">
+                                        <p class="market_name" th:text="${list.title}">제목</p><i></i>
+                                        <span class="add" th:text="${list.addr1}">주소</span>
+                                        <span class="add" th:utext="'<b>별점:</b> ' + ${list.rating} + '  <b>리뷰수:</b> ' + ${list.reviewCnt}"></span>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+    </section>
+
+<script >
+
+    function updateFoodList(listRating, listReview) {
+        // Update the '별점 랭킹' list
+        const ratingRankList = document.querySelector('.rating .rank_list');
+        ratingRankList.innerHTML = ''; // Clear existing items
+
+        listRating.forEach((item, index) => {
+            setTimeout(() => {
+                const li = document.createElement('li');
+                li.className = 'num_1st ranking_top';
+                li.style.cursor = 'default';
+                li.innerHTML = `
+            <span class="list_num"><i></i>${index + 1}위</span>
+            <span class="ico etc"></span>
+            <div class="location_area">
+                <p class="market_name">${item.title}</p><i></i>
+                <p class="add">${item.addr1}</p>
+                <span class="add"><b>별점:</b> ${item.rating}점 <b>리뷰수:</b> ${item.reviewCnt}</span>
+            </div>
+        `;
+                ratingRankList.appendChild(li);
+            }, index * 100);
+        });
+
+        // Update the '리뷰수 랭킹' list
+        const reviewRankList = document.querySelector('.review .rank_list');
+        reviewRankList.innerHTML = ''; // Clear existing items
+
+        listReview.forEach((item, index) => {
+            setTimeout(() => {
+                const li = document.createElement('li');
+                li.className = 'num_1st ranking_top';
+                li.style.cursor = 'default';
+                li.innerHTML = `
+            <span class="list_num"><i></i>${index + 1}위</span>
+            <span class="ico etc"></span>
+            <div class="location_area">
+                <p class="market_name">${item.title}</p><i></i>
+                <p class="add">${item.addr1}</p>
+                <span class="add"><b>별점: </b> ${item.rating}점 <b>리뷰수: </b> ${item.reviewCnt}</span>
+            </div>
+        `;
+                reviewRankList.appendChild(li);
+            }, index * 100);
+        });
+    }
+
+
+
+
+    //     function revealListItems(listSelector, interval) {
+    //     const items = document.querySelectorAll(listSelector + ' li');
+    //     items.forEach((item, index) => {
+    //     setTimeout(() => {
+    //     item.style.display = 'block'; // display를 list-item으로 변경
+    // }, index * interval);
+    // });
+    // }
+    //
+    //     document.addEventListener('DOMContentLoaded', function() {
+    //     // 별점 랭킹 리스트: 0.1초마다 하나씩 보여줌
+    //     revealListItems('.local .rank_list', 100);
+    //
+    //     // 리뷰수 랭킹 리스트: 0.1초마다 하나씩 보여줌
+    //     revealListItems('.out_of .rank_list', 100);
+    // });
+
+
+
+    // 정보 창을 생성한 후 X 버튼 제거
+function removeInfoWindowCloseButton() {
+    // 모든 정보 창의 X 버튼을 찾아서 숨김 처리
+    var closeButtons = document.querySelectorAll('.gm-style-iw + div');
+    closeButtons.forEach(button => {
+        button.style.display = 'none'; // X 버튼을 숨김
+    });
+}
+
+// 정보 창 생성 시마다 X 버튼 제거
+function onInfoWindowCreated() {
+    kakao.maps.event.addListener(map, 'idle', function() {
+        removeInfoWindowCloseButton(); // 모든 정보 창의 X 버튼 숨기기
+    });
+}
+
+// 예제: 특정 마커 클릭 시 정보 창 열기
+var infoWindow = new kakao.maps.InfoWindow({
+    content: '<div style="width:200px;">정보 창 내용</div>'
+});
+infoWindow.open(map, marker);
+onInfoWindowCreated(); // 정보 창 생성 시 X 버튼 제거
+
+
+</script>
+<div th:replace="~{footer :: footer}"></div>
+</body>
+
+<!-- Mirrored from korean.visitkorea.or.kr/localfood/main.do by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Sep 2024 02:34:36 GMT -->
+</html>

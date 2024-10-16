@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <title>카카오 지도 - 행정동 찾기</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=2a9efbc0cbf37efbc7f30e099a9514ac&libraries=services,geometry"></script>
+</head>
+<body>
+<div id="map" style="width:100%;height:350px;"></div>
+<button id="btn">행정동 저장</button>
+<script th:inline="javascript">
+  var locations = /*[[${list}]]*/ [];
+  console.log(locations);
+  var coord = [];
+  var dong ='';
+  var mapContainer = document.getElementById('map'),
+  mapOption = {
+    center: new kakao.maps.LatLng(35.1064430634913, 126.866463491237),
+    level: 3 // 지도 확대 레벨
+  };
+
+  var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+  var geocoder = new kakao.maps.services.Geocoder();
+
+  $('#btn').click(function() {
+    locations.forEach(function(location) {
+      var coord = new kakao.maps.LatLng(location.mapY, location.mapX);
+
+      geocoder.coord2RegionCode(coord.getLng(), coord.getLat(), function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          dong = (result[1].region_3depth_name).toString(); // 첫 번째 결과의 행정동 정보를 저장
+
+          // 행정동 정보 서버에 전송
+          $.ajax({
+            type: 'POST',
+            url: '/api/saveDong',
+            data: { id: location.id, addr1: dong },
+            success: function(response) {
+              //alert('ID: ' + location.id + ' - 행정동 저장완료');
+            },
+            error: function(error) {
+              console.error('Error:', error);
+            }
+          });
+        } else {
+          alert('행정동 정보를 가져올 수 없습니다.');
+        }
+      });
+    });
+  });
+
+</script>
+</body>
+</html>

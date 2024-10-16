@@ -1,0 +1,105 @@
+<header th:fragment="header">
+
+  <link rel="stylesheet" th:href="@{/css/style.css}" media="screen and (min-width:800px)">
+  <link rel="stylesheet" th:href="@{/css/guide.css}">
+  <link rel="stylesheet" th:href="@{/css/reset.css}">
+  <link rel="stylesheet" th:href="@{/css/style_info.css}">
+  <link rel="stylesheet" th:href="@{/css/style-body.css}">
+  <h1>
+    <a href="/main">
+
+
+      <!-- Base64로 인코딩된 PNG 이미지 (지연 로딩 방식 사용) -->
+      <img th:src="@{/images/logo.png}"
+           width="100"
+           alt="kia"
+
+           data-eio-rwidth="292"
+           data-eio-rheight="72">
+      <!-- JavaScript가 비활성화된 환경에서 보여질 이미지 -->
+
+
+    </a>
+  </h1>
+  <div class="inner">
+    <nav class="sp-none">
+      <ul>
+        <li class="parent">
+          <p class="icon">
+            <img src="/images/icon/food1.png" width="18px"/>
+            <a href="javascript:void(0);">음식점</a>
+          </p>
+          <ul class="submenu">
+            <li><a href="/food">음식점 랭킹</a></li>
+            <li><a th:href="@{/foodlist}">음식점 리스트</a></li>
+          </ul>
+        </li>
+        <li class="parent">
+          <p class="icon">
+            <img src="/images/icon/map.png" width="18px"/>
+            <a href="javascript:void(0);">지도</a>
+          </p>
+          <ul class="submenu">
+            <li><a href="/map">광주랜덤지도</a></li>
+            <li><a href="https://map.kakao.com/?q=광주광역시 관광지">지도로보기</a></li>
+
+
+          </ul>
+        </li>
+        <li class="parent">
+          <p class="icon">
+            <img src="/images/icon/reserve.png" width="18px"/>
+            <a href="javascript:void(0);">예약</a></p>
+          <ul class="submenu">
+            <li class="icon">
+              <img src="/images/icon/hotel.png" width="18px"/>
+              <a href="https://www.hotelscombined.co.kr/" target="_blank">
+                호텔예약
+              </a>
+            </li>
+            <li class="icon">
+              <img src="/images/icon/train.png" width="18px"/>
+              <a href="https://www.letskorail.com/ebizprd/EbizPrdTicketpr21100W_pr21110.do" target="_blank">
+                철도
+              </a>
+            </li>
+            <li class="icon">
+              <img src="/images/icon/bihanggi.png" width="18px"/>
+              <a href="https://flight.naver.com/" target="_blank">
+                비행기
+              </a>
+            </li>
+            <li class="icon">
+              <img src="/images/icon/bus.png" width="18px"/>
+              <a href="https://www.kobus.co.kr/main.do" target="_blank">
+                버스
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="parent">
+          <p class="icon">
+            <img src="/images/icon/login.png" width="18px"/>
+            <span th:if="${session.authenticatedUser == null}">
+      <a href="login">로그인</a>
+    </span>
+            <span th:if="${session.authenticatedUser != null}">
+      <a href="/logout">로그아웃</a>
+    </span>
+          </p>
+
+          <!-- 로그인 상태일 때만 마이페이지 메뉴가 보이도록 설정 -->
+          <ul class="submenu" th:if="${session.authenticatedUser != null}">
+            <li class="icon">
+              <img src="/images/icon/mypage.png" width="18px"/>
+              <a href="mypage" target="_blank">마이페이지</a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+
+  </div>
+</header>

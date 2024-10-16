@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ko" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:each="list : ${lists}" >
+        <!--<img th:src="${list.image}">-->
+        <p th:text="${list.title}"> 제목</p>
+        <p th:text="${list.addr1}"> 제목</p>
+        <p th:text="${list.tel}"> 제목</p>
+        <p th:text="${list.rating}"> 제목</p>
+        <p th:text="${list.reviewCnt}"> 제목</p>
+
+    </div>
+
+</body>
+</html>

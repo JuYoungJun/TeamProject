@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+   <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: #45a049;
+        }
+
+        .social-login-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .google { background-color: #de5246; }
+        .kakao { background-color: #fee500; color: black; }
+        .naver { background-color: #2db400; }
+
+        .register-link {
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .register-link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffaf0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            width: 300px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 2px solid #ff9933;
+            box-shadow: 0px 0px 10px rgba(255, 165, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #ff6600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ff9933;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: #e65c00;
+        }
+
+        .social-login-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .google { background-color: #ff6600; }
+        .kakao { background-color: #ff9933; color: black; }
+        .naver { background-color: #cc3300; }
+
+        .register-link {
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .register-link a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+<th:block th:replace="~{favicon :: head1}"></th:block>
+<body>
+<th:block th:replace="~{header :: header}"></th:block>
+
+<div class="login-container">
+    <h2>로그인</h2>
+
+    <!-- 로그인 실패 시 에러 메시지 -->
+    <p th:if="${param.error}" class="error-message">로그인 실패: 이메일 또는 비밀번호가 잘못되었습니다.</p>
+
+    <form th:action="@{/auth/login}" method="post">
+        <div class="input-group">
+            <input type="email" name="email" placeholder="이메일" required>
+        </div>
+        <div class="input-group">
+            <input type="password" name="password" placeholder="비밀번호" required>
+        </div>
+
+        <button class="login-btn" type="submit">로그인</button>
+    </form>
+
+    <p class="register-link">계정이 없으신가요? <a th:href="@{/signup}">계정 생성</a></p>
+
+    <!-- 소셜 로그인 버튼 -->
+    <a th:href="@{/oauth2/authorization/google}" class="social-login-btn google">구글로 로그인</a>
+    <a th:href="@{/oauth2/authorization/kakao}" class="social-login-btn kakao">카카오로 로그인</a>
+    <a th:href="@{/oauth2/authorization/naver}" class="social-login-btn naver">네이버로 로그인</a>
+</div>
+
+</body>
+</html>
