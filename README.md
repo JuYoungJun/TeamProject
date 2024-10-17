@@ -145,7 +145,7 @@ CREATE TABLE `hotel` (
   `modifiedtime` varchar(30) DEFAULT null, -- 수정된 날짜
   `sigungucode` int DEFAULT null, -- 구코드
   `category` int DEFAULT null -- 게시물 유형
-);
+); -- 사용안한 테이블
 
 CREATE TABLE `food` (
   `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT, -- 게시물 넘버
