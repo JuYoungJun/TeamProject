@@ -190,6 +190,14 @@ CREATE TABLE `addresses` (
   `updated_at` TIMESTAMP NULL, -- 수정 시간
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE -- 외래키 제약 조건
 );
+
+-- delete_old_users 이벤트: 논리적으로 삭제된 사용자를 30일 후에 물리적으로 삭제하는 이벤트
+CREATE EVENT IF NOT EXISTS delete_old_users
+ON SCHEDULE EVERY 1 DAY -- 매일 한 번씩 실행
+DO
+  DELETE FROM users
+  WHERE deleted_at IS NOT NULL -- 논리적으로 삭제된 사용자
+  AND deleted_at < NOW() - INTERVAL 30 DAY; -- 삭제된 지 30일이 지난 사용자 계정 물리적으로 삭제
 ```
 
 ---
