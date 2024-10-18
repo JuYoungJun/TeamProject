@@ -27,11 +27,12 @@ public class GwangjuController {
     @Autowired
     private FoodService foodService;
 
-//    @GetMapping("/insertAll")
-//    public String saveLocations() {
-//        service.saveLocations();
-//        return "redirect:/main";
-//    }
+   // @GetMapping("/insertAll")
+   // public String saveLocations() {
+   //     service.saveLocations();
+   //     return "redirect:/main";
+   // } 
+   // 데이터 베이스 정보 너을떄 사용한거
 
     @GetMapping("/utils/dong")
     public void dongChange(Model model, @RequestParam(value = "sigungu", required = false) String sigungu) {
