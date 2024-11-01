@@ -268,24 +268,21 @@ DO
 
 ## 👥 팀 구성원
 
-- **팀장:** [팀장 이름]  
+- **팀장:** [주영준]  
   - 전체 프로젝트 관리 및 주요 기능 설계  
-  - GitHub: [https://github.com/teamleader](https://github.com/teamleader)
+  - GitHub: [https://github.com/teamleader](https://github.com/JuYoungJun/TeamProject)
 
-- **백엔드 개발:** [백엔드 개발자 이름]  
-  - Spring Boot 기반의 로그인 및 인증 구현  
-  - 데이터베이스 연동 및 비즈니스 로직 처리  
-  - GitHub: [https://github.com/backend-dev](https://github.com/backend-dev)
+- **조원:** [김은호]  
+  - 화면 설계 및 사용자 경험 디자인  
+  - GitHub: [https://github.com/backend-dev](https://github.com/Boksill2)
 
-- **프론트엔드 개발:** [프론트엔드 개발자 이름]  
-  - Thymeleaf 기반 화면 설계 및 구현  
-  - CSS 및 JavaScript를 활용한 UI/UX 개선  
-  - GitHub: [https://github.com/frontend-dev](https://github.com/frontend-dev)
+- **조원:** [김희재]  
+  - 데이터베이스 관리  
+  - GitHub: [https://github.com/frontend-dev](https://github.com/mintchoco0001)
 
-- **API 통합 및 QA 담당:** [API/QA 담당자 이름]  
-  - Kakao API 및 OAuth2 로그인 연동  
-  - 유닛 테스트 및 통합 테스트 수행  
-  - GitHub: [https://github.com/api-qa-dev](https://github.com/api-qa-dev)
+- **조원:** [주의진]  
+  - CSS 및 로고 제작  
+  - GitHub: [https://github.com/api-qa-dev](https://github.com/joojooGit)
 
 ---
 
