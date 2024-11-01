@@ -274,15 +274,15 @@ DO
 
 - **조원:** [김은호]  
   - 화면 설계 및 사용자 경험 디자인  
-  - GitHub: [https://github.com/backend-dev](https://github.com/Boksill2)
+  - GitHub: [https://github.com](https://github.com/Boksill2)
 
 - **조원:** [김희재]  
   - 데이터베이스 관리  
-  - GitHub: [https://github.com/frontend-dev](https://github.com/mintchoco0001)
+  - GitHub: [https://github.com](https://github.com/mintchoco0001)
 
 - **조원:** [주의진]  
   - CSS 및 로고 제작  
-  - GitHub: [https://github.com/api-qa-dev](https://github.com/joojooGit)
+  - GitHub: [https://github.com](https://github.com/joojooGit)
 
 ---
 
